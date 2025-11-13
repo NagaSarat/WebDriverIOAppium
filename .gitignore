@@ -1,0 +1,127 @@
+# -------------------------
+# Node / NPM
+# -------------------------
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+package-lock.json
+yarn.lock
+.pnpm-debug.log
+
+# Environment files
+.env
+.env.*
+!.env.example
+
+# -------------------------
+# WebdriverIO / Test results
+# -------------------------
+allure-results/
+allure-report/
+errorShots/
+wdio-logs/
+.wdio/
+reports/
+test-results/
+wdio-report/
+wdio-reports/
+
+# Report / coverage
+coverage/
+.nyc_output/
+.v8-coverage/
+
+# Appium logs
+appium.log
+appium-debug.log
+
+# -------------------------
+# TypeScript / build
+# -------------------------
+dist/
+build/
+*.tsbuildinfo
+tsconfig.tsbuildinfo
+lib/
+*.js
+*.js.map
+
+# -------------------------
+# Test caches & snapshots
+# -------------------------
+jest-cache/
+jest-worker/
+*.snap
+
+# -------------------------
+# IDE specific (allow selected VSCode files)
+# -------------------------
+# Keep workspace settings tracked but ignore the rest
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# JetBrains
+.idea/
+*.iml
+
+# -------------------------
+# OS Specific
+# -------------------------
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# Linux
+*~
+
+# -------------------------
+# Appium / Mobile (common artifacts)
+# -------------------------
+# Android
+**/build/
+**/app/build/
+*.apk
+*.apks
+*.aab
+.gradle/
+local.properties
+
+# iOS / Xcode
+*.ipa
+*.xcarchive
+DerivedData/
+build/
+Pods/
+Podfile.lock
+
+# Keystore / signing
+*.jks
+*.keystore
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# -------------------------
+# CI / Temp / Misc
+# -------------------------
+logs/
+*.log
+tmp/
+temp/
+.cache/
+.parcel-cache/
+.eslintcache
+.vscode-test/
+.Dockerfile.swp
