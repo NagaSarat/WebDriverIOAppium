@@ -1,6 +1,6 @@
 # 🚀 WebDriverIO Appium Automation Framework
 
-A powerful **mobile automation testing framework** built using **WebdriverIO**, **Appium**, **TypeScript**, and **Allure Reports**.  
+A powerful **Mobile Automation Testing Framework** built using **WebdriverIO**, **Appium**, **TypeScript**, and **Allure Reports**.  
 Supports both **Android** and **iOS** testing with simple setup and reporting integration.
 
 ---
@@ -12,7 +12,7 @@ Before setting up the framework, make sure the following are installed:
 - [Node.js (Latest LTS)](https://nodejs.org/)
 - Android SDK (for Android automation)
 - Xcode (for iOS automation)
-- Appium & Drivers (see setup below)
+- Appium & Drivers (see setup under Appium Installation & Configuration section)
 
 ---
 
@@ -122,5 +122,3 @@ This framework provides:
 - Use `appium-doctor` frequently to check setup health.
 - Always clean old reports before generating new ones.
 - You can configure parallel execution and cloud device testing (e.g., BrowserStack, SauceLabs).
-
-

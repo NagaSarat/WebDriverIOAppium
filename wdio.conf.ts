@@ -7,7 +7,7 @@ const androidCaps = {
   platformName: 'Android',
   'appium:automationName': 'UiAutomator2',
   'appium:deviceName': 'emulator-5554', // or your real device name
-  'appium:platformVersion': '16.0',
+  'appium:platformVersion': '12.0',
   //'appium:app': path.join(process.cwd(), 'apps/Cogmento.apk'),
   'appium:noReset': false,
   'appium:appPackage': 'com.wdiodemoapp',
