@@ -90,6 +90,9 @@ To run a specific test case (example: `login.spec.ts`):
 
 ```bash
 npx wdio run ./wdio.conf.ts --spec ./test/specs/login.spec.ts
+
+npx wdio run ./wdio.parallel.conf.ts
+
 ```
 
 ---
