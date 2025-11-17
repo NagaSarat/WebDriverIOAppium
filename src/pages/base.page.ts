@@ -1,32 +1,32 @@
 import { browser, $, $$ } from '@wdio/globals';
 
 export default class BasePage {
-  async waitUntilVisible(xpath: string, timeout = 20000) {
+  async waitUntilVisible(xpath: string) {
     const el = await browser.$(xpath);
-    await el.waitForDisplayed({ timeout });
+    await el.waitForDisplayed();
     return el;
   }
 
-  async click(xpath: string, timeout = 10000) {
-    const el = await this.waitUntilVisible(xpath, timeout);
+  async click(xpath: string) {
+    const el = await this.waitUntilVisible(xpath);
     await el.click();
   }
 
-  async sendKeys(xpath: string, text: string, timeout = 30000) {
-    const el = await this.waitUntilVisible(xpath, timeout);
+  async sendKeys(xpath: string, text: string) {
+    const el = await this.waitUntilVisible(xpath);
     await el.clearValue();
     await el.setValue(text);
   }
 
-  async getText(xpath: string, timeout = 10000) {
-    const el = await this.waitUntilVisible(xpath, timeout);
+  async getText(xpath: string) {
+    const el = await this.waitUntilVisible(xpath);
     return el.getText();
   }
 
-  async isVisible(xpath: string, timeout = 5000) {
+  async isVisible(xpath: string) {
     try {
       const el = await browser.$(xpath);
-      return await el.waitForDisplayed({ timeout, reverse: false });
+      return await el.waitForDisplayed({ reverse: false });
     } catch {
       return false;
     }

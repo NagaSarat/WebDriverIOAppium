@@ -7,7 +7,7 @@ const androidCaps = {
   platformName: 'Android',
   'appium:automationName': 'UiAutomator2',
   'appium:deviceName': 'emulator-5554', // or your real device name
-  'appium:platformVersion': '12.0',
+  'appium:platformVersion': '16.0',
   //'appium:app': path.join(process.cwd(), 'apps/Cogmento.apk'),
   'appium:noReset': false,
   'appium:appPackage': 'com.wdiodemoapp',
@@ -32,6 +32,7 @@ export const config: Options.Testrunner = {
   runner: 'local',
   specs: ['./test/specs/**/*.ts'],
   maxInstances: 1,
+  waitforTimeout: 20000,
 
   //
   // ✅ Point WebdriverIO to the manually started Appium server
