@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx wdio run ./wdio.conf.ts"
+    "test": "npx wdio run ./wdio.conf.ts",
+    "allure:report": "allure generate allure-results --clean && allure open"
   },
   "keywords": [],
   "author": "",

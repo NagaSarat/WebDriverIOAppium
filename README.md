@@ -99,8 +99,7 @@ npx wdio run ./wdio.conf.ts --spec ./test/specs/login.spec.ts
 After test execution, generate and open the Allure report using:
 
 ```bash
-npx allure generate allure-results --clean
-npx allure open
+npm run allure:report
 ```
 
 ---
@@ -122,3 +121,6 @@ This framework provides:
 - Use `appium-doctor` frequently to check setup health.
 - Always clean old reports before generating new ones.
 - You can configure parallel execution and cloud device testing (e.g., BrowserStack, SauceLabs).
+
+##
+- You can change golbal timeout in wdio.conf.ts at 'waitforTimeout: <milliseconds>'
