@@ -7,7 +7,7 @@
     "esModuleInterop": true,
     "moduleResolution": "nodenext",
 
-    // ✅ Add these lines:
+    
     "types": ["node", "@wdio/globals/types", "@wdio/mocha-framework"]
   },
   "include": [

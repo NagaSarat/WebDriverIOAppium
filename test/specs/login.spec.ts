@@ -1,17 +1,17 @@
 import loginPage from '../../src/pages/login.page';
-import BasePage from '../../src/pages/base.page';
+import CommonActionsPage from '../../Utilities/CommonActions.page';
 import loginData from '../../testdata/loginData.json';
-import loginpage from '../../object-repository/loginpage.json';
+
 
 describe('Mobile App - Login Test', () => {
-  const base = new BasePage();
+  const base = new CommonActionsPage();
 
   it('should login successfully and show welcome message', async () => {
     
-    await base.waitUntilVisible(loginpage.loginModule, 20000);
+    await base.waitUntilVisible("loginModule", 20000);
     await loginPage.login(loginData.validUser.username, loginData.validUser.password);
-    await base.isVisible(loginpage.EmailError, 15000);
-    await base.isVisible(loginpage.PasswordError, 15000);
+    await base.isVisible("EmailError", 15000);
+    await base.isVisible("PasswordError", 15000);
     await base.takeScreenshot('after-login');
   });
 });

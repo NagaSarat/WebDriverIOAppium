@@ -1,8 +1,31 @@
 {
-  "usernameInput": "//android.widget.EditText[@content-desc='input-email']",
-  "passwordInput": "//android.widget.EditText[@content-desc='input-password']",
-  "loginModule": "//android.widget.TextView[@text='Login']",
-  "loginButton": "//android.view.ViewGroup[@content-desc='button-LOGIN']/android.view.ViewGroup",
-  "EmailError": "//android.widget.TextView[@text='Please enter a valid email address']",
-  "PasswordError": "//android.widget.TextView[@text='Please enter at least 8 characters']"
+  "usernameInput": {
+    "android": "//android.widget.EditText[@content-desc='input-email']",
+    "ios": "//XCUIElementTypeTextField[@name='inputEmail']"
+  },
+
+  "passwordInput": {
+    "android": "//android.widget.EditText[@content-desc='input-password']",
+    "ios": "//XCUIElementTypeSecureTextField[@name='inputPassword']"
+  },
+
+  "loginModule": {
+    "android": "//android.widget.TextView[@text='Login']",
+    "ios": "//XCUIElementTypeStaticText[contains(@name,'Login')]"
+  },
+
+  "loginButton": {
+    "android": "//android.view.ViewGroup[@content-desc='button-LOGIN']/android.view.ViewGroup",
+    "ios": "//XCUIElementTypeButton[@name='LOGIN']"
+  },
+
+  "EmailError": {
+    "android": "//android.widget.TextView[@text='Please enter a valid email address']",
+    "ios": "//XCUIElementTypeStaticText[contains(@name,'valid email')]"
+  },
+
+  "PasswordError": {
+    "android": "//android.widget.TextView[@text='Please enter at least 8 characters']",
+    "ios": "//XCUIElementTypeStaticText[contains(@name,'8 characters')]"
+  }
 }
