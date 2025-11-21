@@ -86,18 +86,27 @@ appium --address 127.0.0.1 --port 4723
 
 ## 🧪 Running Test Cases
 
-To run a specific test case (example: `login.spec.ts`):
-
-```bash
+###  ▶️ Run a specific test case
+bash
+Copy code
 npx wdio run ./wdio.conf.ts --spec ./test/specs/login.spec.ts
 
+### ▶️ Run all test cases sequentially (single device)
+bash
+Copy code
+npx wdio run ./wdio.conf.ts
+
+### ▶️ Run all test cases in parallel
+bash
+Copy code
 npx wdio run ./wdio.parallel.conf.ts
 
+### ▶️ Run test cases in parallel with specific test distribution per device
+bash
+Copy code
 npx wdio run wdio.parallel.conf.ts --specMap="emulator-5556:login.spec.ts emulator-5554:log.spec.ts"
 
-```
 
----
 
 ## 📊 Generating & Viewing Allure Reports
 
