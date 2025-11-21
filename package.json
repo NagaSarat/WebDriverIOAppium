@@ -28,6 +28,9 @@
     "chai": "^6.2.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
-    "webdriverio": "^8.46.0"
+    "webdriverio": "^8.46.0"    
+  },
+  "dependencies": {
+    "tree-kill": "^1.2.2"
   }
 }

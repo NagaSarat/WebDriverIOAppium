@@ -90,6 +90,11 @@ To run a specific test case (example: `login.spec.ts`):
 
 ```bash
 npx wdio run ./wdio.conf.ts --spec ./test/specs/login.spec.ts
+
+npx wdio run ./wdio.parallel.conf.ts
+
+npx wdio run wdio.parallel.conf.ts --specMap="emulator-5556:login.spec.ts emulator-5554:log.spec.ts"
+
 ```
 
 ---
@@ -99,7 +104,7 @@ npx wdio run ./wdio.conf.ts --spec ./test/specs/login.spec.ts
 After test execution, generate and open the Allure report using:
 
 ```bash
-npm run allure:report
+allure generate allure-results --clean && allure open allure-report
 ```
 
 ---
