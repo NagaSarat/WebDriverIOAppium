@@ -93,6 +93,8 @@ npx wdio run ./wdio.conf.ts --spec ./test/specs/login.spec.ts
 
 npx wdio run ./wdio.parallel.conf.ts
 
+npx wdio run wdio.parallel.conf.ts --specMap="emulator-5556:login.spec.ts emulator-5554:log.spec.ts"
+
 ```
 
 ---
@@ -102,8 +104,7 @@ npx wdio run ./wdio.parallel.conf.ts
 After test execution, generate and open the Allure report using:
 
 ```bash
-npx allure generate allure-results --clean
-npx allure open
+allure generate allure-results --clean && allure open allure-report
 ```
 
 ---

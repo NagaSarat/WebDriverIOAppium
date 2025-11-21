@@ -2,7 +2,7 @@ import type { Options } from '@wdio/types'
 import path from 'path'
 import { spawn } from 'child_process'
 import kill from 'tree-kill'
-import { distributeSpecs } from './spec-distributor'
+import { getManualSpecMap, autoDistribute } from './spec-distributor';
 import waitPort from 'wait-port';
 
 
@@ -38,14 +38,24 @@ const devices = [
 // ---------------------------------------------
 // BUILD CAPABILITIES
 // ---------------------------------------------
+const manualMap = getManualSpecMap();
+
 const capabilitiesList: any[] = devices.map((dev, index) => {
     let cap: any = {
         hostname: '127.0.0.1',
         port: dev.port,
         path: '/',
         maxInstances: 1,
-        specs: distributeSpecs(index, devices.length) // per-capability unique specs
+        specs: manualMap && manualMap[dev.udid]
+            ? manualMap[dev.udid]
+            : autoDistribute(index, devices.length),
+
+        // 💥 FIX: per-device reporters
+        'wdio:options': {
+            outputDir: `allure-results/${dev.udid}`
+        }
     }
+
 
     if (dev.platform === 'android') {
         Object.assign(cap, {
@@ -63,7 +73,7 @@ const capabilitiesList: any[] = devices.map((dev, index) => {
         })
     }
 
-    if (dev.platform === 'ios') {
+    if (dev.platform === 'android') {
         Object.assign(cap, {
             platformName: 'Android',
             'appium:automationName': 'UiAutomator2',
@@ -133,12 +143,9 @@ export const config: Options.Testrunner = {
     reporters: [
     'spec',
     ['allure', {
-        outputDir: process.env.CURRENT_DEVICE
-            ? `allure-results/${process.env.CURRENT_DEVICE}`
-            : 'allure-results/unknown',
         disableWebdriverStepsReporting: true,
         disableWebdriverScreenshotsReporting: false,
-    }],
+    }]
 ],
 
     // ---------------------------------------------
