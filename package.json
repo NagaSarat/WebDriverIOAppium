@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "npx wdio run ./wdio.conf.ts",
-    "allure:report": "allure generate allure-results --clean && allure open"
+    "allure:report": "allure generate allure-results --clean && allure open",
+    "generate:test": "ts-node ./scripts/generate-test.ts"
   },
   "keywords": [],
   "author": "",
