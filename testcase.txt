@@ -1,1 +1,24 @@
-Validate Account Screen
+TestCaseTitle: TC-ACC-001 — Verify Account Screen Loads Correctly (Happy path)
+SpecFile: accountScreen.spec.ts
+PageClass: accountScreenPage.ts
+LocatorsFile: accountScreenLocators.json
+
+Preconditions
+User installed the app and is on the Home screen.
+User is signed in (valid account) or an onboarding flow has completed.
+
+Steps
+Tap the Profile icon from the Home screen.
+Wait for the Account screen to render (spinner disappears).
+Observe top header: profile picture, user name, policy number.
+Verify available tiles: Policies, Claims, Payments, Documents, Settings, Sign out.
+Tap “Policies” — ensure a policies list loads.
+Navigate back to Account screen.
+Tap “Edit Profile”  — ensure fields open with correct prefilled values.
+
+Expected Results
+Profile picture shows 
+User name and unique identifier (policy number/ID) displayed correctly.
+All listed action items (Policies, Claims, Payments, Documents, Settings, Sign out) are visible and tappable.
+Tapping “Policies” opens correct screen with at least one policy row 
+Edit Profile displays editable fields prefilled with current user data.
