@@ -21,7 +21,7 @@ Before setting up the framework, make sure the following are installed:
 After cloning this repository, install the required dependencies:
 
 ```bash
-npm install --save-dev @types/chai@^5.2.3 @types/jest@^30.0.0 @types/mocha@^10.0.10 @types/node@^24.10.1 @wdio/allure-reporter@^9.20.0 @wdio/appium-service@^8.38.0 @wdio/cli@^8.38.0 @wdio/globals@^8.38.0 @wdio/local-runner@^8.38.0 @wdio/mocha-framework@^8.38.0 @wdio/spec-reporter@^8.38.0 @wdio/types@^8.10.1 allure-commandline@^2.34.1 chai@^6.2.1 ts-node@^10.9.2 typescript@^5.9.3 webdriverio@^8.38.0
+npm install
 ```
 
 ---
