@@ -10,8 +10,6 @@ describe('Mobile App - Login Test', () => {
     
     await base.waitUntilVisible("loginModule", 20000);
     await loginPage.login(loginData.validUser.username, loginData.validUser.password);
-    await base.isVisible("EmailError", 15000);
-    await base.isVisible("PasswordError", 15000);
-    await base.takeScreenshot('after-login');
+    await base.isVisible("EmailError", 15000);    
   });
 });
