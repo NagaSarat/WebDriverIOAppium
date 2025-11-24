@@ -130,6 +130,7 @@ This framework provides:
 - ✅ TypeScript for strongly-typed automation  
 - ✅ Allure Reporting for detailed test insights  
 - ✅ Support for both Android & iOS platforms  
+- ✅ Integrated with MCP()  
 - ✅ Easy scalability and maintainability  
 
 ---
