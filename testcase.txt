@@ -4,9 +4,7 @@ PageClass: signUpScreenPage.ts
 LocatorsFile: signUpScreenLocators.json
 
 Preconditions
-• User has installed the app.  
 • User is on the Login / Sign up Form screen.  
-• No existing account is registered with the test email used in this scenario.  
 
 Steps
 1. Tap on the **Sign up** tab.  
