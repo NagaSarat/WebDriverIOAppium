@@ -5,7 +5,6 @@ LocatorsFile: signUpScreenLocators.json
 
 Preconditions
 • User has installed the app.  
-• Device is connected to Wi-Fi or mobile data.  
 • User is on the Login / Sign up Form screen.  
 • No existing account is registered with the test email used in this scenario.  
 
@@ -15,19 +14,19 @@ Steps
 3. Verify Password input field is visible.  
 4. Verify Confirm Password input field is visible.  
 5. Tap inside the Email field and enter a valid new email address.  
-6. Tap inside the Password field and enter a valid password (meeting required password rules, if any).  
+6. Tap inside the Password field and enter a valid password
 7. Tap inside Confirm Password field and enter the same password.  
 8. Verify the **SIGN UP** button becomes enabled after filling all fields.  
 9. Tap the **SIGN UP** button.  
-10. Wait for the loading/spinner (if any) to disappear.  
-11. Verify the user is navigated to the appropriate post-registration screen (e.g., Welcome screen, Verification screen, or Home screen).  
+10. Wait for the loading/spinner to disappear.  
+11. Verify the user is navigated to the Welcome screen
 
 Expected Results
 • Sign up tab is selected and displayed correctly.  
 • Email, Password, and Confirm Password fields are visible and accept input.  
 • Password and Confirm Password fields mask user input.  
 • SIGN UP button remains disabled until all fields contain valid data.  
-• Password and Confirm Password must match — otherwise, an error should display (not part of this positive test).  
+• Password and Confirm Password must match — otherwise, an error should display
 • Upon tapping SIGN UP with valid inputs, account creation is initiated.  
 • User successfully reaches the next expected screen after registration.  
 • No error message is displayed for valid sign-up details.  
