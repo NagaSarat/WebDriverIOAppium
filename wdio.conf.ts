@@ -1,186 +1,133 @@
-import type { Options } from '@wdio/types';
-import path from 'path';
-import { execSync } from 'child_process';
-import fs from "fs";
-import allure from '@wdio/allure-reporter';
+import type { Options } from "@wdio/types";
+import path from "path";
 
+// ✅ Imports from Hooks/index.ts
+import {
+  startAppiumServers,
+  stopAppiumServers,
+  cleanAllureReports,
+  beforeCommandHook,
+  afterCommandHook,
+  beforeTestHook,
+  afterTestHook
+} from "./Hooks/index";
 
-/**
- * ==============================
- * KILL APPIUM SERVER ON PORT 4723
- * ==============================
- */
-function killAppium() {
-  try {
-    console.log('Checking if Appium is running on port 4723...');
-
-    if (process.platform === 'win32') {
-      // Windows kill
-      execSync(
-        `for /f "tokens=5" %a in ('netstat -aon ^| find ":4723" ^| find "LISTENING"') do taskkill /PID %a /F`,
-        { stdio: 'ignore' }
-      );
-    } else {
-      // macOS/Linux kill
-      execSync(`kill -9 $(lsof -t -i:4723)`, { stdio: 'ignore' });
-    }
-
-    console.log('Old Appium server stopped successfully.');
-  } catch {
-    console.log('No Appium server running, safe to start.');
-  }
-}
-
-function cleanAllureResults() {
-  const resultsPath = path.join(process.cwd(), "allure-results");
-
-  if (fs.existsSync(resultsPath)) {
-    fs.rmSync(resultsPath, { recursive: true, force: true });
-    console.log("🧹 Deleted old Allure results.");
-  }
-}
-
-/**
- * ==============================
- * CAPABILITIES
- * ==============================
- */
+/* -------------------------------------------------------------------------- */
+/*                               CAPABILITIES                                 */
+/* -------------------------------------------------------------------------- */
 const androidCaps = {
-  platformName: 'Android',
-  'appium:automationName': 'UiAutomator2',
-  'appium:deviceName': 'emulator-5554',
-  'appium:platformVersion': '16.0',
-  'appium:noReset': false,
-  'appium:appPackage': 'com.wdiodemoapp',
-  'appium:appActivity': 'com.wdiodemoapp.MainActivity',
-  'appium:appWaitActivity': 'com.wdiodemoapp.*',
-  'appium:autoGrantPermissions': true,
-  'appium:shouldTerminateApp': true
+  platformName: "Android",
+  "appium:automationName": "UiAutomator2",
+  "appium:deviceName": "emulator-5554",
+  "appium:platformVersion": "16.0",
+  "appium:noReset": false,
+  "appium:appPackage": "com.wdiodemoapp",
+  "appium:appActivity": "com.wdiodemoapp.MainActivity",
+  "appium:autoGrantPermissions": true,
 };
 
 const iosCaps = {
-  platformName: 'iOS',
-  'appium:automationName': 'XCUITest',
-  'appium:deviceName': 'iPhone 14',
-  'appium:platformVersion': '16.0',
-  'appium:app': path.join(process.cwd(), 'apps/Cogmento.ipa'),
-  'appium:noReset': true
+  platformName: "iOS",
+  "appium:automationName": "XCUITest",
+  "appium:deviceName": "iPhone 14",
+  "appium:platformVersion": "16.0",
+  "appium:app": path.join(process.cwd(), "apps/Cogmento.ipa"),
+  "appium:noReset": true,
 };
 
-// ─────────────────────────────
-// PLATFORM SELECTION
-// ─────────────────────────────
-const platform = (process.env.PLATFORM || 'android').toLowerCase();
+const platform = (process.env.PLATFORM || "android").toLowerCase();
 
-/**
- * ==============================
- * FINAL WDIO CONFIG
- * ==============================
- */
+/* -------------------------------------------------------------------------- */
+/*                                WDIO CONFIG                                 */
+/* -------------------------------------------------------------------------- */
 export const config: Options.Testrunner = {
-  runner: 'local',
+  runner: "local",
 
-  specs: ['./test/specs/**/*.ts'],
+  specs: ["./test/specs/**/*.ts"],
   maxInstances: 1,
-  waitforTimeout: 20000,
 
-  hostname: '127.0.0.1',
+  hostname: "127.0.0.1",
   port: 4723,
-  path: '/', // Required for Appium v2/v3
+  path: "/",
 
-  capabilities: [platform === 'android' ? androidCaps : iosCaps],
+  capabilities: [platform === "android" ? androidCaps : iosCaps],
 
-  logLevel: 'info',
+  logLevel: "info",
 
   reporters: [
-    'spec',
+    "spec",
     [
-      'allure',
+      "allure",
       {
-        outputDir: 'allure-results',
-        disableWebdriverStepsReporting: true,
-        disableWebdriverScreenshotsReporting: false
-      }
-    ]
+        outputDir: path.join(process.cwd(), "allure-results"),
+        disableWebdriverStepsReporting: false,
+        disableWebdriverScreenshotsReporting: false,
+      },
+    ],
   ],
 
-  /**
-   * ==============================
-   * AUTO-START APPIUM SERVICE
-   * ==============================
-   */
+  /* ---------------------------------------------------------------------- */
+  /*                                 SERVICES                               */
+  /* ---------------------------------------------------------------------- */
   services: [
     [
-      'appium',
+      "appium",
       {
-        command: 'appium',
-        logPath: './appium-logs',
+        command: "appium",
         args: {
-          basePath: '/',
+          basePath: "/",
           relaxedSecurity: true,
-          allowInsecure: 'chromedriver_autodownload'
         },
-        launchTimeout: 60000
-      }
-    ]
+        logPath: "./appium-logs",
+      },
+    ],
   ],
 
-  /**
-   * ==============================
-   * KILL SERVER BEFORE RUN
-   * ==============================
-   */
-  onPrepare: function () {
-    killAppium();
-     cleanAllureResults();  
+  /* ---------------------------------------------------------------------- */
+  /*                        BEFORE TEST EXECUTION                           */
+  /* ---------------------------------------------------------------------- */
+  onPrepare: async () => {
+    console.log("▶️  Cleaning Allure Reports");
+    await cleanAllureReports();
+
+    console.log("▶️  Stopping old Appium servers (if any)");
+    await stopAppiumServers();
+
+    console.log("▶️  Starting Appium server");
+    // startAppiumServers can take port as optional argument; default 4723
+    await startAppiumServers(4723);
   },
 
-  framework: 'mocha',
+  /* ---------------------------------------------------------------------- */
+  /*                                  HOOKS                                 */
+  /* ---------------------------------------------------------------------- */
+  beforeTest: beforeTestHook,
+  afterTest: afterTestHook,
+
+  beforeCommand: beforeCommandHook,
+  afterCommand: afterCommandHook,
+
+  framework: "mocha",
   mochaOpts: {
-    ui: 'bdd',
-    timeout: 60000
+    ui: "bdd",
+    timeout: 60000,
   },
 
   autoCompileOpts: {
     autoCompile: true,
     tsNodeOpts: {
       transpileOnly: true,
-      project: './tsconfig.json'
-    }
+      project: "./tsconfig.json",
+    },
   },
 
-  /**
-   * ==============================
-   * 📸 Screenshot on Failure
-   * ==============================
-   */
- afterTest: async function (test, context, { error, passed }) {
-  try {
-    // Take screenshot ALWAYS
-    const screenshot = await browser.takeScreenshot();
-
-    const name = passed
-      ? `STEP COMPLETED - ${test.title}`
-      : `STEP FAILED - ${test.title}`;
-
-    allure.addAttachment(
-      name,
-      Buffer.from(screenshot, 'base64'),
-      'image/png'
-    );
-  } catch (err) {
-    console.warn("Failed to take step screenshot:", err);
-  }
-},
-
-
-  /**
-   * ==============================
-   *  KILL SERVER AFTER RUN
-   * ==============================
-   */
-  onComplete: function () {
-    killAppium(); 
-  }
+  /* ---------------------------------------------------------------------- */
+  /*                           AFTER TEST SUITE                             */
+  /* ---------------------------------------------------------------------- */
+  onComplete: async () => {
+    console.log("🛑 Stopping Appium server after execution");
+    await stopAppiumServers();
+  },
 };
+
 export default config;
