@@ -1,24 +1,30 @@
-TestCaseTitle: TC-ACC-001 — Verify Account Screen Loads Correctly (Happy path)
-SpecFile: accountScreen.spec.ts
-PageClass: accountScreenPage.ts
-LocatorsFile: accountScreenLocators.json
+TestCaseTitle: TC-SIGNUP-001 — Verify User Sign Up with Valid Details
+SpecFile: signUpScreen.spec.ts
+PageClass: signUpScreenPage.ts
+LocatorsFile: signUpScreenLocators.json
 
 Preconditions
-User installed the app and is on the Home screen.
-User is signed in (valid account) or an onboarding flow has completed.
+• User is on the Login / Sign up Form screen.  
 
 Steps
-Tap the Profile icon from the Home screen.
-Wait for the Account screen to render (spinner disappears).
-Observe top header: profile picture, user name, policy number.
-Verify available tiles: Policies, Claims, Payments, Documents, Settings, Sign out.
-Tap “Policies” — ensure a policies list loads.
-Navigate back to Account screen.
-Tap “Edit Profile”  — ensure fields open with correct prefilled values.
+1. Tap on the **Sign up** tab.  
+2. Verify Email input field is visible.  
+3. Verify Password input field is visible.  
+4. Verify Confirm Password input field is visible.  
+5. Tap inside the Email field and enter a valid new email address.  
+6. Tap inside the Password field and enter a valid password
+7. Tap inside Confirm Password field and enter the same password.  
+8. Verify the **SIGN UP** button becomes enabled after filling all fields.  
+9. Tap the **SIGN UP** button.  
+10. Wait for the loading/spinner to disappear.  
+11. Verify the user is navigated to the Welcome screen
 
 Expected Results
-Profile picture shows 
-User name and unique identifier (policy number/ID) displayed correctly.
-All listed action items (Policies, Claims, Payments, Documents, Settings, Sign out) are visible and tappable.
-Tapping “Policies” opens correct screen with at least one policy row 
-Edit Profile displays editable fields prefilled with current user data.
+• Sign up tab is selected and displayed correctly.  
+• Email, Password, and Confirm Password fields are visible and accept input.  
+• Password and Confirm Password fields mask user input.  
+• SIGN UP button remains disabled until all fields contain valid data.  
+• Password and Confirm Password must match — otherwise, an error should display
+• Upon tapping SIGN UP with valid inputs, account creation is initiated.  
+• User successfully reaches the next expected screen after registration.  
+• No error message is displayed for valid sign-up details.  

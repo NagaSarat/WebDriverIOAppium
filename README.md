@@ -111,6 +111,10 @@ npx wdio run wdio.parallel.conf.ts --specMap="emulator-5556:login.spec.ts emulat
 ## To generate test.spec.ts, page.ts and locators automatically using MCP
 Edit testcase.txt file with the file names and test case and run below command then files will be generated and placed in folder locations as per framework folder structure
 
+add api key
+```
+setx OPENAI_API_KEY "your-api-key-here"
+```
 ```npm
 npm run generate:test -- testcase.txt
 ```
