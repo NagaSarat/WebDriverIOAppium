@@ -401,25 +401,10 @@ git push origin feature/your-feature-name
 
 ---
 
-## 🎬 Demo — Allure Report with Screenshots
-
-> Replace with your own GIF/screenshot examples
-
-📌 Example Test Execution GIF:
-```
-📸 demo.gif
-```
-
-📌 Example Allure Report Screenshot:
-```
-📸 allure-report.png
-```
-
----
 
 ## 🏁 Conclusion
 
-This framework enables fast, maintainable, scalable, and AI-assisted mobile test automation with WebdriverIO & Appium — suitable for enterprise and startup-level projects.
+This framework enables fast, maintainable, scalable, and AI-assisted mobile test automation with WebdriverIO & Appium.
 
 Feel free to fork, enhance, and contribute! 💙
 
