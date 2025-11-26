@@ -60,11 +60,11 @@ export default class CommonActionsPage {
   // ---------------------------------------------------------
   // Element Actions
   // ---------------------------------------------------------
-  async waitUntilVisible(key: string, timeout = 15000) {
-    const locator = this.getLocator(key);
-    const element = await $(locator);
-    await element.waitForDisplayed({ timeout });
-    return element;
+  async waitUntilVisible(key: string) {
+  const locator = this.getLocator(key);
+  const element = await $(locator);
+  await element.waitForDisplayed(); // uses default waitforTimeout
+  return element;
   }
 
   async waitForClickable(key: string, timeout = 10000) {
@@ -84,13 +84,13 @@ export default class CommonActionsPage {
     await el.setValue(value);
   }
 
-  async isVisible(key: string, timeout = 5000): Promise<boolean> {
-    try {
-      const locator = this.getLocator(key);
-      return await $(locator).waitForDisplayed({ timeout });
-    } catch {
-      return false;
-    }
+  async isVisible(key: string): Promise<boolean> {
+  try {
+    const locator = this.getLocator(key);
+    return await $(locator).waitForDisplayed(); // uses WDIO default timeout
+  } catch {
+    return false;
+  }
   }
 
   async takeScreenshot(name = 'screenshot') {
