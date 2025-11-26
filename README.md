@@ -320,6 +320,7 @@ jobs:
 │
 ├── test/
 │   └── specs/                   # Test scripts
+│   └── testdata/                # Test data
 │
 ├── scripts/                     # LLM test generation/misc tools
 ├── allure-results/              # Results from test execution
@@ -353,13 +354,13 @@ jobs:
                    ▼
         ┌──────────────────────┐
         │       Appium         │
-        │ (Android / iOS Dev)  │
+        │   (Android / iOS )   │
         └──────────┬───────────┘
                    │
                    ▼
         ┌──────────────────────┐
         │     Real Device /    │
-        │      Emulator        │
+        │   Emulator / Cloud   │
         └──────────────────────┘
 ```
 
