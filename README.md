@@ -1,24 +1,38 @@
-# 🚀 WebDriverIO Appium Automation Framework
+# 🚀 WebdriverIO + Appium Mobile Automation Framework
 
-A powerful **Mobile Automation Testing Framework** built using **WebdriverIO**, **Appium**, **TypeScript**, and **Allure Reports**.  
-Supports both **Android** and **iOS** testing with simple setup and reporting integration.
+A powerful **mobile automation testing framework** built using:
+
+- **WebdriverIO**
+- **Appium**
+- **TypeScript**
+- **Mocha**
+- **Allure Reports**
+
+Supports both **Android** and **iOS** testing with simple setup, rich reporting, modular architecture, and optional test generation using **MCP + OpenAI**.
 
 ---
 
 ## 🧰 Prerequisites
 
-Before setting up the framework, make sure the following are installed:
+Before setting up this framework, ensure the following tools are installed:
 
 - [Node.js (Latest LTS)](https://nodejs.org/)
-- Android SDK (for Android automation)
-- Xcode (for iOS automation)
-- Appium & Drivers (see setup under Appium Installation & Configuration section)
+- Android SDK (required for Android automation)
+- Xcode (required for iOS automation — macOS only)
+- Appium and required drivers
+- Java 8+ installed and configured
+
+✅ Ensure the following environment variables are configured:
+
+- `JAVA_HOME`
+- `ANDROID_HOME`
+- `PATH` includes platform-tools, emulator & tools
 
 ---
 
 ## ⚙️ Project Setup
 
-After cloning this repository, install the required dependencies:
+Clone repository and install dependencies:
 
 ```bash
 npm install
@@ -28,23 +42,21 @@ npm install
 
 ## 🤖 Appium Installation & Configuration
 
-If Appium is **not installed**, follow these steps:
+### 1️⃣ Install Node.js
+Download Node.js from:
+https://nodejs.org/
 
-### 1️⃣ Install Node.js  
-Download and install Node.js from:  
-🔗 [https://nodejs.org/](https://nodejs.org/)
-
-### 2️⃣ Install Appium  
-Install Appium globally:
+### 2️⃣ Install Appium
 ```bash
 npm install -g appium
 ```
+
 Verify installation:
 ```bash
 appium -v
 ```
 
-### 3️⃣ Install Drivers
+### 3️⃣ Install Appium Drivers
 
 #### Android:
 ```bash
@@ -56,85 +68,347 @@ appium driver install uiautomator2
 appium driver install xcuitest
 ```
 
-Check installed drivers:
+Check drivers:
 ```bash
 appium driver list
 ```
 
-### 4️⃣ (Optional) Verify Environment with Appium Doctor  
-This helps ensure all SDKs and tools are correctly set up:
+### 4️⃣ Validate Environment (Recommended)
 ```bash
 npm install -g appium-doctor
-appium-doctor --android
+
+appium-doctor --android   # For Android
+appium-doctor --ios       # For iOS (macOS only)
 ```
+
+---
+
+## 📱 Selecting Platform (Android / iOS)
+
+Run test with platform selection:
+
+```bash
+PLATFORM=android npx wdio run ./wdio.conf.ts
+```
+```bash
+PLATFORM=ios npx wdio run ./wdio.conf.ts
+```
+
+If no platform is provided, **Android** is used by default.
 
 ---
 
 ## 🧪 Running Test Cases
 
-###  ▶️ Run a specific test case
+### ▶️ Run a specific test file
 ```bash
 npx wdio run ./wdio.conf.ts --spec ./test/specs/login.spec.ts
 ```
 
-### ▶️ Run all test cases sequentially (single device)
+### ▶️ Run full test suite
 ```bash
 npx wdio run ./wdio.conf.ts
 ```
 
-### ▶️ Run all test cases in parallel
+### ▶️ Parallel execution
 ```bash
 npx wdio run ./wdio.parallel.conf.ts
 ```
 
-### ▶️ Run test cases in parallel with specific test distribution per device
+### ▶️ Distribute test files across devices
 ```bash
-npx wdio run wdio.parallel.conf.ts --specMap="emulator-5556:login.spec.ts emulator-5554:log.spec.ts"
+npx wdio run wdio.parallel.conf.ts --specMap="emulator-5556:login.spec.ts emulator-5554:home.spec.ts"
 ```
 
 ---
 
-## To generate test.spec.ts, page.ts and locators automatically using MCP
-Edit testcase.txt file with the file names and test case and run below command then files will be generated and placed in folder locations as per framework folder structure
+## 🧠 Auto-Generate Tests, Pages & Locators with MCP + OpenAI
 
-add api key
-```
+This framework supports automated file generation using LLMs.
+
+### 1️⃣ Set your OpenAI API key
+
+**Windows:**
+```bash
 setx OPENAI_API_KEY "your-api-key-here"
 ```
-```npm
+
+**macOS / Linux:**
+```bash
+export OPENAI_API_KEY="your-api-key-here"
+```
+
+### 2️⃣ Update `testcase.txt`
+Provide:
+- Test case title
+- Spec filename
+- Page object filename
+- Locator filename
+- Preconditions
+- Steps
+- Expected result
+
+### 3️⃣ Generate files
+```bash
 npm run generate:test -- testcase.txt
 ```
+
+✅ Files will auto-generate and be placed correctly following POM structure.
 
 ---
 
 ## 📊 Generating & Viewing Allure Reports
 
-After test execution, generate and open the Allure report using:
+After test execution:
 
 ```bash
 allure serve allure-results
 ```
 
----
+or
 
-## 🧾 Summary
-
-This framework provides:
-
-- ✅ WebdriverIO + Appium Integration  
-- ✅ TypeScript for strongly-typed automation  
-- ✅ Allure Reporting for detailed test insights  
-- ✅ Support for both Android & iOS platforms  
-- ✅ Integrated with MCP and OpenAI LLM
-- ✅ Easy scalability and maintainability  
+```bash
+allure generate allure-results --clean
+allure open
+```
 
 ---
 
-## 💡 Tips
+## 🖼️ Step-Level Screenshot Control
 
-- Use `appium-doctor` frequently to check setup health.
-- Always clean old reports before generating new ones.
-- You can configure parallel execution and cloud device testing (e.g., Pcloudy).
+This framework allows configurable screenshot behavior:
 
-##
-- You can change golbal timeout in wdio.conf.ts at 'waitforTimeout: <milliseconds>'
+### Enable screenshots globally
+```bash
+SCREENSHOT_STEPS=true npx wdio run ./wdio.conf.ts
+```
+
+### Disable screenshots
+```bash
+SCREENSHOT_STEPS=false npx wdio run ./wdio.conf.ts
+```
+
+### Override in test code
+```ts
+await base.addStep('Login successful', true);
+```
+
+Screenshots attach to the same Allure step.
+
+---
+
+## ⏱️ Timeout Configuration
+
+Modify global element wait timeout in `wdio.conf.ts`:
+
+```ts
+waitforTimeout: 60000, // 60 seconds
+```
+
+---
+
+## ✅ Framework Highlights
+
+- ✅ WebdriverIO + Appium + TypeScript
+- ✅ Cross-platform (Android + iOS)
+- ✅ Page Object Model structure
+- ✅ Allure reporting with step screenshots
+- ✅ Run sequentially or in parallel
+- ✅ Built-in test file generator via MCP + OpenAI
+- ✅ Screenshot toggle via environment variable
+- ✅ Clean & scalable folder structure
+
+---
+
+## 💡 Recommendations
+
+- Always run `appium-doctor` after SDK upgrades
+- Delete old allure-results before new runs for cleaner reporting
+- Maintain separate configs for CI, staging & prod
+- Use cloud device providers (BrowserStack, pCloudy, SauceLabs) for scaling
+
+---
+
+## 🚦 CI/CD Integration (Jenkins & GitHub Actions)
+
+### ✅ Jenkins Pipeline Example
+```groovy
+pipeline {
+  agent any
+
+  stages {
+    stage('Checkout') {
+      steps {
+        git 'https://github.com/your-org/your-repo.git'
+      }
+    }
+
+    stage('Install Dependencies') {
+      steps {
+        sh 'npm install'
+      }
+    }
+
+    stage('Run Tests') {
+      steps {
+        sh 'SCREENSHOT_STEPS=true npx wdio run ./wdio.conf.ts'
+      }
+    }
+
+    stage('Generate Allure Report') {
+      steps {
+        sh 'allure generate allure-results --clean'
+      }
+    }
+
+    stage('Publish Report') {
+      steps {
+        allure includeProperties: false, jdk: '', results: [[path: 'allure-results']]
+      }
+    }
+  }
+}
+```
+
+### ✅ GitHub Actions Workflow Example
+```yaml
+name: Mobile Automation CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Tests
+        run: SCREENSHOT_STEPS=true npx wdio run ./wdio.conf.ts
+
+      - name: Upload Allure Results
+        uses: actions/upload-artifact@v3
+        with:
+          name: allure-results
+          path: allure-results
+```
+
+---
+
+## 📁 Folder Structure
+```
+📦 mobile-automation-framework
+│
+├── apps/                        # APK/IPA files
+├── src/
+│   ├── pages/                   # Page Object files
+│   ├── locators/                # Central JSON locator files
+│   └── utilities/               # Helper utilities & common actions
+│
+├── test/
+│   └── specs/                   # Test scripts
+│
+├── scripts/                     # LLM test generation/misc tools
+├── allure-results/              # Results from test execution
+├── allure-report/               # Generated allure report
+├── wdio.conf.ts                 # Main WDIO configuration
+├── wdio.parallel.conf.ts        # Parallel execution config
+├── testcase.txt                 # Test generation input
+└── README.md
+```
+
+---
+
+## 🏗️ Framework Architecture
+```
+        ┌──────────────────────┐
+        │      Test Specs      │
+        │   (Mocha + WDIO)     │
+        └──────────┬───────────┘
+                   │
+                   ▼
+        ┌──────────────────────┐
+        │   Page Objects (POM) │
+        │  Actions + Elements  │
+        └──────────┬───────────┘
+                   │
+                   ▼
+        ┌──────────────────────┐
+        │   WebdriverIO APIs   │
+        └──────────┬───────────┘
+                   │
+                   ▼
+        ┌──────────────────────┐
+        │       Appium         │
+        │ (Android / iOS Dev)  │
+        └──────────┬───────────┘
+                   │
+                   ▼
+        ┌──────────────────────┐
+        │     Real Device /    │
+        │      Emulator        │
+        └──────────────────────┘
+```
+
+---
+
+## 🏷️ Technology Badges
+
+![Node](https://img.shields.io/badge/Node.js-18+-green)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue)
+![WebdriverIO](https://img.shields.io/badge/WebdriverIO-v9-red)
+![Appium](https://img.shields.io/badge/AppiumServer-v2-purple)
+![Allure](https://img.shields.io/badge/AllureReport-v9-orange)
+
+---
+
+## 🤝 Contribution Guidelines
+
+✅ Fork the repository
+
+✅ Create a feature branch
+```bash
+git checkout -b feature/your-feature-name
+```
+
+✅ Commit with clear message
+```bash
+git commit -m "Added login page automation"
+```
+
+✅ Push and create pull request
+```bash
+git push origin feature/your-feature-name
+```
+
+✅ Ensure PR includes:
+- Meaningful title & description
+- Test coverage where applicable
+- Linting + formatting compliance
+
+---
+
+
+## 🏁 Conclusion
+
+This framework enables fast, maintainable, scalable, and AI-assisted mobile test automation with WebdriverIO & Appium.
+
+Feel free to fork, enhance, and contribute! 💙
+
+---
+
+📩 For questions, enhancements, or feature requests — open an issue!
+

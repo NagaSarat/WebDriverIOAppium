@@ -243,7 +243,7 @@ async function main() {
   console.log('Final locators filename (before sanitization):', locatorsFilename);
 
   // Example files for LLM style guidance
-  const exampleLocatorPath = path.join(repoRoot, 'object-repository', 'loginpage.json');
+  const exampleLocatorPath = path.join(repoRoot,'src', 'object-repository', 'loginpage.json');
   const examplePagePath = path.join(repoRoot, 'src', 'pages', 'login.page.ts');
   const exampleSpecPath = path.join(repoRoot, 'test', 'specs', 'login.spec.ts');
 
@@ -261,7 +261,7 @@ I will give you a single test-case title and desired filenames/names. Generate t
 
 1) A test spec (.spec.ts) to live under test/specs/
 2) A Page object (.page.ts) to live under src/pages/
-3) A locators JSON to live under object-repository/
+3) A locators JSON to live under src/object-repository/
 
 Constraints:
 - Return ONLY a single JSON object (no extra text) with keys:
@@ -274,7 +274,7 @@ Constraints:
 - Use this exact locators filename (basename): ${locatorsFilename}
 - Name the spec file basename: ${specFilename} (place under test/specs/)
 - Name the page file basename: ${pageFilename} (place under src/pages/)
-- Name the locators file basename: ${locatorsFilename} (place under object-repository/)
+- Name the locators file basename: ${locatorsFilename} (place under src/object-repository/)
 
 Testcase title:
 ${testcaseTitle}
@@ -313,7 +313,7 @@ Return the JSON now.
   // Determine target directories (we will ignore LLM-provided paths for placement, but keep contents from LLM)
   const specTarget = path.join(repoRoot, 'test', 'specs', safeSpecBasename);
   const pageTarget = path.join(repoRoot, 'src', 'pages', safePageBasename);
-  const locatorsTarget = path.join(repoRoot, 'object-repository', safeLocatorsBasename);
+  const locatorsTarget = path.join(repoRoot, 'src','object-repository', safeLocatorsBasename);
 
   // Ensure directories exist
   [specTarget, pageTarget, locatorsTarget].forEach(p => {

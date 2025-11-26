@@ -1,11 +1,12 @@
 import fs from 'fs';
 import path from 'path';
+import allure from '@wdio/allure-reporter';
 
 //
 // ---------------------------------------------------------
 // Load all locator JSON files ONCE (no WebDriver used here)
 // ---------------------------------------------------------
-const repoPath = path.join(process.cwd(), 'object-repository');   // <-- Correct folder path
+const repoPath = path.join(process.cwd(),'src', 'object-repository');   // <-- Correct folder path
 
 if (!fs.existsSync(repoPath)) {
   throw new Error(`object-repository folder not found at: ${repoPath}`);
@@ -187,4 +188,21 @@ export default class CommonActionsPage {
   async pause(ms: number) {
     await browser.pause(ms);
   }
+
+  async addStep(stepMessage: string, takeScreenshot: boolean = false) {
+    // log step in allure
+    allure.addStep(stepMessage);
+
+    if (!takeScreenshot) return;
+
+    const screenshot = await browser.takeScreenshot();
+
+    // attach screenshot to that step
+    allure.addAttachment(
+      `${stepMessage} - screenshot`,
+      Buffer.from(screenshot, 'base64'),
+      'image/png'
+    );
+  }
+
 }
