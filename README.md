@@ -369,10 +369,9 @@ jobs:
 
 ![Node](https://img.shields.io/badge/Node.js-18+-green)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)
-![WebdriverIO](https://img.shields.io/badge/WebdriverIO-v8-red)
+![WebdriverIO](https://img.shields.io/badge/WebdriverIO-v9-red)
 ![Appium](https://img.shields.io/badge/Appium-v2-purple)
-![Allure](https://img.shields.io/badge/Allure-Report-orange)
-![License](https://img.shields.io/badge/License-MIT-yellow)
+![Allure](https://img.shields.io/badge/AllureReport-v9-orange)
 
 ---
 
