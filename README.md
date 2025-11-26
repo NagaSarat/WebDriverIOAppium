@@ -5,6 +5,7 @@ A powerful **mobile automation testing framework** built using:
 - **WebdriverIO**
 - **Appium**
 - **TypeScript**
+- **Mocha**
 - **Allure Reports**
 
 Supports both **Android** and **iOS** testing with simple setup, rich reporting, modular architecture, and optional test generation using **MCP + OpenAI**.
