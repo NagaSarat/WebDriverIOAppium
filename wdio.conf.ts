@@ -1,6 +1,9 @@
 import type { Options } from '@wdio/types';
 import path from 'path';
 import { execSync } from 'child_process';
+import fs from "fs";
+import allure from '@wdio/allure-reporter';
+
 
 /**
  * ==============================
@@ -25,6 +28,15 @@ function killAppium() {
     console.log('Old Appium server stopped successfully.');
   } catch {
     console.log('No Appium server running, safe to start.');
+  }
+}
+
+function cleanAllureResults() {
+  const resultsPath = path.join(process.cwd(), "allure-results");
+
+  if (fs.existsSync(resultsPath)) {
+    fs.rmSync(resultsPath, { recursive: true, force: true });
+    console.log("🧹 Deleted old Allure results.");
   }
 }
 
@@ -121,6 +133,7 @@ export const config: Options.Testrunner = {
    */
   onPrepare: function () {
     killAppium();
+     cleanAllureResults();  
   },
 
   framework: 'mocha',
@@ -142,11 +155,25 @@ export const config: Options.Testrunner = {
    * 📸 Screenshot on Failure
    * ==============================
    */
-  afterTest: async function (test, context, { error }) {
-    if (error) {
-      await browser.takeScreenshot();
-    }
-  },
+ afterTest: async function (test, context, { error, passed }) {
+  try {
+    // Take screenshot ALWAYS
+    const screenshot = await browser.takeScreenshot();
+
+    const name = passed
+      ? `STEP COMPLETED - ${test.title}`
+      : `STEP FAILED - ${test.title}`;
+
+    allure.addAttachment(
+      name,
+      Buffer.from(screenshot, 'base64'),
+      'image/png'
+    );
+  } catch (err) {
+    console.warn("Failed to take step screenshot:", err);
+  }
+},
+
 
   /**
    * ==============================
@@ -154,8 +181,7 @@ export const config: Options.Testrunner = {
    * ==============================
    */
   onComplete: function () {
-    killAppium();
+    killAppium(); 
   }
 };
-
 export default config;
