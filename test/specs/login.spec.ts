@@ -8,8 +8,8 @@ describe('Mobile App - Login Test', () => {
 
   it('should login successfully and show welcome message', async () => {
     
-    await base.waitUntilVisible("loginModule", 20000);
+    await base.waitUntilVisible("loginModule");
     await loginPage.login(loginData.validUser.username, loginData.validUser.password);
-    await base.isVisible("EmailError", 15000);    
+    await base.isVisible("EmailError");    
   });
 });

@@ -1,4 +1,3 @@
-import type { Options } from '@wdio/types'
 import path from 'path'
 import { spawn } from 'child_process'
 import kill from 'tree-kill'
@@ -92,7 +91,7 @@ const startedServers: any[] = [];
 // ---------------------------------------------
 // WDIO CONFIG
 // ---------------------------------------------
-export const config: Options.Testrunner = {
+export const config: WebdriverIO.Config = {
     runner: 'local',
     specs: [],
     maxInstances: devices.length,
@@ -147,7 +146,7 @@ export const config: Options.Testrunner = {
     // ---------------------------------------------
     afterTest: async (test, context, { error, passed }) => {
         try {
-            const screenshot = await browser.takeScreenshot();
+            const screenshot = await (browser as any).takeScreenshot();
 
             const name = passed
                 ? `STEP PASSED - ${test.title}`
@@ -178,10 +177,7 @@ export const config: Options.Testrunner = {
         });
     },
 
-    autoCompileOpts: {
-        autoCompile: true,
-        tsNodeOpts: { transpileOnly: true, project: './tsconfig.json' }
-    }
+tsConfigPath: './tsconfig.json'
 };
 
 export default config;

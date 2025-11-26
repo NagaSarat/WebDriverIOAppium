@@ -67,12 +67,13 @@ export default class CommonActionsPage {
   return element;
   }
 
-  async waitForClickable(key: string, timeout = 10000) {
+  async waitForClickable(key: string) {
     const locator = this.getLocator(key);
     const element = await $(locator);
-    await element.waitForClickable({ timeout });
+    await element.waitForClickable(); // uses default timeout
     return element;
   }
+
 
   async click(key: string) {
     const el = await this.waitUntilVisible(key);

@@ -70,43 +70,29 @@ appium-doctor --android
 
 ---
 
-## 🧩 Starting Appium Server
-
-To start the Appium server:
-```bash
-appium
-```
-
-Or, to specify a host and port:
-```bash
-appium --address 127.0.0.1 --port 4723
-```
-
----
-
 ## 🧪 Running Test Cases
 
 ###  ▶️ Run a specific test case
-bash
-Copy code
+```bash
 npx wdio run ./wdio.conf.ts --spec ./test/specs/login.spec.ts
+```
 
 ### ▶️ Run all test cases sequentially (single device)
-bash
-Copy code
+```bash
 npx wdio run ./wdio.conf.ts
+```
 
 ### ▶️ Run all test cases in parallel
-bash
-Copy code
+```bash
 npx wdio run ./wdio.parallel.conf.ts
+```
 
 ### ▶️ Run test cases in parallel with specific test distribution per device
-bash
-Copy code
+```bash
 npx wdio run wdio.parallel.conf.ts --specMap="emulator-5556:login.spec.ts emulator-5554:log.spec.ts"
+```
 
-
+---
 
 ## To generate test.spec.ts, page.ts and locators automatically using MCP
 Edit testcase.txt file with the file names and test case and run below command then files will be generated and placed in folder locations as per framework folder structure
@@ -126,7 +112,7 @@ npm run generate:test -- testcase.txt
 After test execution, generate and open the Allure report using:
 
 ```bash
-allure generate allure-results --clean && allure open allure-report
+allure serve allure-results
 ```
 
 ---
@@ -148,7 +134,7 @@ This framework provides:
 
 - Use `appium-doctor` frequently to check setup health.
 - Always clean old reports before generating new ones.
-- You can configure parallel execution and cloud device testing (e.g., BrowserStack, SauceLabs).
+- You can configure parallel execution and cloud device testing (e.g., Pcloudy).
 
 ##
 - You can change golbal timeout in wdio.conf.ts at 'waitforTimeout: <milliseconds>'
