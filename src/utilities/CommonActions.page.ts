@@ -6,7 +6,7 @@ import allure from '@wdio/allure-reporter';
 // ---------------------------------------------------------
 // Load all locator JSON files ONCE (no WebDriver used here)
 // ---------------------------------------------------------
-const repoPath = path.join(process.cwd(), 'object-repository');   // <-- Correct folder path
+const repoPath = path.join(process.cwd(),'src', 'object-repository');   // <-- Correct folder path
 
 if (!fs.existsSync(repoPath)) {
   throw new Error(`object-repository folder not found at: ${repoPath}`);

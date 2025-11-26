@@ -1,6 +1,6 @@
 import loginPage from '../../src/pages/login.page';
-import CommonActionsPage from '../../Utilities/CommonActions.page';
-import loginData from '../../testdata/loginData.json';
+import CommonActionsPage from '../../src/utilities/CommonActions.page';
+import loginData from '../../test/testdata/loginData.json';
 import allure from '@wdio/allure-reporter';
 
 
