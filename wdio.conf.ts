@@ -98,7 +98,7 @@ export const config: WebdriverIO.Config = {
       {
         outputDir: 'allure-results',
         disableWebdriverStepsReporting: true,
-        disableWebdriverScreenshotsReporting: false
+        disableWebdriverScreenshotsReporting: true
       }
     ]
   ],
@@ -173,7 +173,15 @@ export const config: WebdriverIO.Config = {
    */
   onComplete: function () {
     killAppium();
-  }
+  },
+
+  
+  /**
+   * Custom Global Config Flag
+   * Pass SCREENSHOT_STEPS=true to enable screenshots
+   */
+  screenshotSteps: process.env.SCREENSHOT_STEPS === 'true'
+  
 };
 
 export default config;

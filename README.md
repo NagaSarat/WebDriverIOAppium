@@ -138,3 +138,8 @@ This framework provides:
 
 ##
 - You can change golbal timeout in wdio.conf.ts at 'waitforTimeout: <milliseconds>'
+- Bash commands to enable/disable screenshot
+```bash
+SCREENSHOT_STEPS=true  npx wdio run ./wdio.conf.ts   # enable
+SCREENSHOT_STEPS=false npx wdio run ./wdio.conf.ts   # disable
+```

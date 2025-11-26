@@ -8,14 +8,14 @@ describe('Mobile App - Login', () => {
   const base = new CommonActionsPage();
   it('should login successfully and show welcome message', async () => {
     await base.waitUntilVisible("loginModule");
-    allure.addStep('Login Module displayed');
+    await base.addStep('Login Module displayed',true);
     await loginPage.login(loginData.validUser.username, loginData.validUser.password);
-    allure.addStep('Entered username & password');
+    await base.addStep('Entered username & password',true);
     await base.isVisible("EmailError");
-    allure.addStep('Email error message displayed');
+    await base.addStep('Email error message displayed',true);
     await base.isVisible("PasswordError");
-    allure.addStep('Password error message displayed');
+    await base.addStep('Password error message displayed',true);
     await base.waitUntilVisible("loginButton");
-    allure.addStep('Login Button displayed');
+    await base.addStep('Login Button displayed',true);
   });
 });
