@@ -92,6 +92,8 @@ npx wdio run ./wdio.parallel.conf.ts
 npx wdio run wdio.parallel.conf.ts --specMap="emulator-5556:login.spec.ts emulator-5554:log.spec.ts"
 ```
 
+---
+
 ## To generate test.spec.ts, page.ts and locators automatically using MCP
 Edit testcase.txt file with the file names and test case and run below command then files will be generated and placed in folder locations as per framework folder structure
 
@@ -132,7 +134,7 @@ This framework provides:
 
 - Use `appium-doctor` frequently to check setup health.
 - Always clean old reports before generating new ones.
-- You can configure parallel execution and cloud device testing (e.g., BrowserStack, SauceLabs).
+- You can configure parallel execution and cloud device testing (e.g., Pcloudy).
 
 ##
 - You can change golbal timeout in wdio.conf.ts at 'waitforTimeout: <milliseconds>'
