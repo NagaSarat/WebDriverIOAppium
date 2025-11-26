@@ -126,7 +126,7 @@ npm run generate:test -- testcase.txt
 After test execution, generate and open the Allure report using:
 
 ```bash
-allure generate allure-results --clean && allure open allure-report
+allure serve allure-results
 ```
 
 ---
