@@ -73,22 +73,22 @@ appium-doctor --android
 ## 🧪 Running Test Cases
 
 ###  ▶️ Run a specific test case
-```
+```bash
 npx wdio run ./wdio.conf.ts --spec ./test/specs/login.spec.ts
 ```
 
 ### ▶️ Run all test cases sequentially (single device)
-```
+```bash
 npx wdio run ./wdio.conf.ts
 ```
 
 ### ▶️ Run all test cases in parallel
-```
+```bash
 npx wdio run ./wdio.parallel.conf.ts
 ```
 
 ### ▶️ Run test cases in parallel with specific test distribution per device
-```
+```bash
 npx wdio run wdio.parallel.conf.ts --specMap="emulator-5556:login.spec.ts emulator-5554:log.spec.ts"
 ```
 
