@@ -7,11 +7,11 @@ describe('Mobile App - Login Test', () => {
   const base = new CommonActionsPage();
 
   it('should login successfully and show welcome message', async () => {
-    allure.addStep('Waiting for Login Module');
     await base.waitUntilVisible("loginModule");
+    allure.addStep('Login Module displayed');
     await loginPage.login(loginData.validUser.username, loginData.validUser.password);
     allure.addStep('Entered username & password');
-    allure.addStep('Validating error message');
     await base.isVisible("EmailError");    
+    allure.addStep('Email error message displayed');
   });
 });
