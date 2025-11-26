@@ -1,9 +1,7 @@
-import type { Options } from '@wdio/types';
 import path from 'path';
 import { execSync } from 'child_process';
 import fs from "fs";
 import allure from '@wdio/allure-reporter';
-
 
 /**
  * ==============================
@@ -12,7 +10,7 @@ import allure from '@wdio/allure-reporter';
  */
 function killAppium() {
   try {
-    console.log('Checking if Appium is running on port 4723...');
+    console.log('Checking if Appium is running on port 4723.');
 
     if (process.platform === 'win32') {
       // Windows kill
@@ -49,7 +47,7 @@ const androidCaps = {
   platformName: 'Android',
   'appium:automationName': 'UiAutomator2',
   'appium:deviceName': 'emulator-5554',
-  'appium:platformVersion': '15.0',
+  'appium:platformVersion': '16.0',
   'appium:noReset': false,
   'appium:app': path.join(process.cwd(), 'apps/Android-NativeDemoApp-0.4.0.apk'),
   'appium:appPackage': 'com.wdiodemoapp',
@@ -78,12 +76,12 @@ const platform = (process.env.PLATFORM || 'android').toLowerCase();
  * FINAL WDIO CONFIG
  * ==============================
  */
-export const config: Options.Testrunner = {
+export const config: WebdriverIO.Config = {
   runner: 'local',
 
   specs: ['./test/specs/**/*.ts'],
   maxInstances: 1,
-  waitforTimeout: 20000,
+  waitforTimeout: 60000,
 
   hostname: '127.0.0.1',
   port: 4723,
@@ -121,7 +119,7 @@ export const config: Options.Testrunner = {
           relaxedSecurity: true,
           allowInsecure: 'chromedriver_autodownload'
         },
-        launchTimeout: 60000
+        launchTimeout: 120000
       }
     ]
   ],
@@ -133,7 +131,7 @@ export const config: Options.Testrunner = {
    */
   onPrepare: function () {
     killAppium();
-     cleanAllureResults();  
+    cleanAllureResults();
   },
 
   framework: 'mocha',
@@ -142,38 +140,31 @@ export const config: Options.Testrunner = {
     timeout: 60000
   },
 
-  autoCompileOpts: {
-    autoCompile: true,
-    tsNodeOpts: {
-      transpileOnly: true,
-      project: './tsconfig.json'
-    }
-  },
+  tsConfigPath: './tsconfig.json',
 
   /**
    * ==============================
    * 📸 Screenshot on Failure
    * ==============================
    */
- afterTest: async function (test, context, { error, passed }) {
-  try {
-    // Take screenshot ALWAYS
-    const screenshot = await browser.takeScreenshot();
+  afterTest: async function (test, context, { error, passed }) {
+    try {
+      // Take screenshot ALWAYS
+      const screenshot = await browser.takeScreenshot();
 
-    const name = passed
-      ? `STEP COMPLETED - ${test.title}`
-      : `STEP FAILED - ${test.title}`;
+      const name = passed
+        ? `STEP COMPLETED - ${test.title}`
+        : `STEP FAILED - ${test.title}`;
 
-    allure.addAttachment(
-      name,
-      Buffer.from(screenshot, 'base64'),
-      'image/png'
-    );
-  } catch (err) {
-    console.warn("Failed to take step screenshot:", err);
-  }
-},
-
+      allure.addAttachment(
+        name,
+        Buffer.from(screenshot, 'base64'),
+        'image/png'
+      );
+    } catch (err) {
+      console.warn("Failed to take step screenshot:", err);
+    }
+  },
 
   /**
    * ==============================
@@ -181,7 +172,8 @@ export const config: Options.Testrunner = {
    * ==============================
    */
   onComplete: function () {
-    killAppium(); 
+    killAppium();
   }
 };
+
 export default config;
