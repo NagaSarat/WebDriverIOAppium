@@ -368,9 +368,9 @@ jobs:
 ## 🏷️ Technology Badges
 
 ![Node](https://img.shields.io/badge/Node.js-18+-green)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue)
 ![WebdriverIO](https://img.shields.io/badge/WebdriverIO-v9-red)
-![Appium](https://img.shields.io/badge/Appium-v2-purple)
+![Appium](https://img.shields.io/badge/AppiumServer-v2-purple)
 ![Allure](https://img.shields.io/badge/AllureReport-v9-orange)
 
 ---
