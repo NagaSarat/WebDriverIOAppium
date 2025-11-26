@@ -73,17 +73,24 @@ appium-doctor --android
 ## 🧪 Running Test Cases
 
 ###  ▶️ Run a specific test case
-```npx wdio run ./wdio.conf.ts --spec ./test/specs/login.spec.ts```
+```
+npx wdio run ./wdio.conf.ts --spec ./test/specs/login.spec.ts
+```
 
 ### ▶️ Run all test cases sequentially (single device)
-```npx wdio run ./wdio.conf.ts```
+```
+npx wdio run ./wdio.conf.ts
+```
 
 ### ▶️ Run all test cases in parallel
-```npx wdio run ./wdio.parallel.conf.ts```
+```
+npx wdio run ./wdio.parallel.conf.ts
+```
 
 ### ▶️ Run test cases in parallel with specific test distribution per device
-```npx wdio run wdio.parallel.conf.ts --specMap="emulator-5556:login.spec.ts emulator-5554:log.spec.ts"```
-
+```
+npx wdio run wdio.parallel.conf.ts --specMap="emulator-5556:login.spec.ts emulator-5554:log.spec.ts"
+```
 
 ## To generate test.spec.ts, page.ts and locators automatically using MCP
 Edit testcase.txt file with the file names and test case and run below command then files will be generated and placed in folder locations as per framework folder structure
