@@ -28,7 +28,7 @@ const devices = [
         port: 4723,
         systemPort: 8200,
         platform: 'android',
-        appPath: path.join(process.cwd(), 'apps/Android-NativeDemoApp-0.4.0.apk'),
+        appPath: path.join(process.cwd(), 'apps/android/Android-NativeDemoApp-0.4.0.apk'),
         platformVersion: '16.0',
         appPackage: 'com.wdiodemoapp',
         appActivity: 'com.wdiodemoapp.MainActivity'
@@ -39,7 +39,7 @@ const devices = [
         port: 4725,
         systemPort: 8100,
         platform: 'android',
-        appPath: path.join(process.cwd(), 'apps/Android-NativeDemoApp-0.4.0.apk'),
+        appPath: path.join(process.cwd(), 'apps/android/Android-NativeDemoApp-0.4.0.apk'),
         platformVersion: '16.0',
         appPackage: 'com.wdiodemoapp',
         appActivity: 'com.wdiodemoapp.MainActivity'
