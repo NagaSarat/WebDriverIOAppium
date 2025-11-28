@@ -6,7 +6,7 @@ import allure from '@wdio/allure-reporter';
 // ---------------------------------------------------------
 // Load all locator JSON files ONCE (no WebDriver used here)
 // ---------------------------------------------------------
-const repoPath = path.join(process.cwd(),'src', 'object-repository');   // <-- Correct folder path
+const repoPath = path.join(process.cwd(), 'src', 'object-repository');   // <-- Correct folder path
 
 if (!fs.existsSync(repoPath)) {
   throw new Error(`object-repository folder not found at: ${repoPath}`);
@@ -62,10 +62,10 @@ export default class CommonActionsPage {
   // Element Actions
   // ---------------------------------------------------------
   async waitUntilVisible(key: string) {
-  const locator = this.getLocator(key);
-  const element = await $(locator);
-  await element.waitForDisplayed(); // uses default waitforTimeout
-  return element;
+    const locator = this.getLocator(key);
+    const element = await $(locator);
+    await element.waitForDisplayed(); // uses default waitforTimeout
+    return element;
   }
 
   async waitForClickable(key: string) {
@@ -87,12 +87,12 @@ export default class CommonActionsPage {
   }
 
   async isVisible(key: string): Promise<boolean> {
-  try {
-    const locator = this.getLocator(key);
-    return await $(locator).waitForDisplayed(); // uses WDIO default timeout
-  } catch {
-    return false;
-  }
+    try {
+      const locator = this.getLocator(key);
+      return await $(locator).waitForDisplayed(); // uses WDIO default timeout
+    } catch {
+      return false;
+    }
   }
 
   async takeScreenshot(name = 'screenshot') {
@@ -154,7 +154,7 @@ export default class CommonActionsPage {
       try {
         const el = await $(locator);
         if (await el.isDisplayed()) return el;
-      } catch {}
+      } catch { }
 
       await this.swipeUp();
     }
@@ -182,7 +182,7 @@ export default class CommonActionsPage {
   }
 
   async hideKeyboard() {
-    try { await browser.hideKeyboard(); } catch {}
+    try { await browser.hideKeyboard(); } catch { }
   }
 
   async pause(ms: number) {
@@ -204,5 +204,4 @@ export default class CommonActionsPage {
       'image/png'
     );
   }
-
 }
