@@ -11,9 +11,16 @@ class LoginPage extends CommonActionsPage {
     await this.click("loginButton");
   }
 
-  async validateError(){
-    await this.isVisible("EmailError")
+  async validateEmailError(){
+    await this.isVisible("EmailError");
   }
   
+  async validatePasswordError(){
+    await this.isVisible("PasswordError");
+  }
+
+  async validateLoginButton(){
+    await this.waitUntilVisible("loginButton");
+  }
 }
 export default new LoginPage();
