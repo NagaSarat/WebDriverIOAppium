@@ -6,8 +6,6 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "moduleResolution": "nodenext",
-
-    
     "types": ["node", "@wdio/globals/types", "@wdio/mocha-framework"]
   },
   "include": [

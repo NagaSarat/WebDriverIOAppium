@@ -49,7 +49,7 @@ const androidCaps = {
   'appium:deviceName': 'emulator-5554',
   'appium:platformVersion': '16.0',
   'appium:noReset': false,
-  'appium:app': path.join(process.cwd(), 'apps/Android-NativeDemoApp-0.4.0.apk'),
+  'appium:app': path.join(process.cwd(), 'apps/android/Android-NativeDemoApp-0.4.0.apk'),
   'appium:appPackage': 'com.wdiodemoapp',
   'appium:appActivity': 'com.wdiodemoapp.MainActivity',
   'appium:appWaitActivity': 'com.wdiodemoapp.*',

@@ -20,7 +20,7 @@ export const config: Options.Testrunner = {
     'appium:launchTimeout': 90000,
 
     // Correct app path usage
-    'appium:app': path.join(process.cwd(), 'apps/Android-NativeDemoApp-0.4.0.apk'),
+    'appium:app': path.join(process.cwd(), 'apps/android/Android-NativeDemoApp-0.4.0.apk'),
 
       'pcloudy:options': {
         pCloudy_Username: 'nagasharath.akula@qualizeal.com',
