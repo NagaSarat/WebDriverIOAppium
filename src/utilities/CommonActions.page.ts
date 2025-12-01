@@ -79,13 +79,13 @@ export default class CommonActionsPage {
   async click(key: string) {
     const el = await this.waitUntilVisible(key);
     await el.click();
-    this.addStep("clicked on "+key,true);
+    this.addStep("clicked on "+key);
   }
 
   async setValue(key: string, value: string) {
     const el = await this.waitUntilVisible(key);
     await el.setValue(value);
-    this.addStep("Entered '"+value+"' in "+key,true);
+    this.addStep("Entered '"+value+"' in "+key);
   }
 
   async isVisible(key: string): Promise<boolean> {

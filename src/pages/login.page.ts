@@ -1,5 +1,4 @@
 import CommonActionsPage from '../utilities/CommonActions.page';
-import loginpage from '../../src/object-repository/loginpage.json';
 
 class LoginPage extends CommonActionsPage {
 

@@ -149,15 +149,14 @@ export const config: WebdriverIO.Config = {
    */
   afterTest: async function (test, context, { error, passed }) {
     try {
-      // Take screenshot ALWAYS
+      // ❌ Do NOT take screenshot if test passed
+      if (passed) return;
+
+      // 📸 Only on FAILURE
       const screenshot = await browser.takeScreenshot();
 
-      const name = passed
-        ? `STEP COMPLETED - ${test.title}`
-        : `STEP FAILED - ${test.title}`;
-
       allure.addAttachment(
-        name,
+        `STEP FAILED - ${test.title}`,
         Buffer.from(screenshot, 'base64'),
         'image/png'
       );
@@ -175,13 +174,13 @@ export const config: WebdriverIO.Config = {
     killAppium();
   },
 
-  
+
   /**
    * Custom Global Config Flag
    * Pass SCREENSHOT_STEPS=true to enable screenshots
    */
   screenshotSteps: process.env.SCREENSHOT_STEPS === 'true'
-  
+
 };
 
 export default config;
