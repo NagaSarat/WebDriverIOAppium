@@ -1,5 +1,4 @@
 import CommonActionsPage from '../utilities/CommonActions.page';
-import loginpage from '../../src/object-repository/loginpage.json';
 
 class LoginPage extends CommonActionsPage {
 
@@ -11,9 +10,16 @@ class LoginPage extends CommonActionsPage {
     await this.click("loginButton");
   }
 
-  async validateError(){
-    await this.isVisible("EmailError")
+  async validateEmailError(){
+    await this.isVisible("EmailError");
   }
   
+  async validatePasswordError(){
+    await this.isVisible("PasswordError");
+  }
+
+  async validateLoginButton(){
+    await this.waitUntilVisible("loginButton");
+  }
 }
 export default new LoginPage();
