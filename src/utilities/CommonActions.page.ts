@@ -191,7 +191,7 @@ export default class CommonActionsPage {
     await browser.pause(ms);
   }
 
-  async addStep(stepMessage: string, takeScreenshot: boolean = false) {
+  async addStep(stepMessage: string, takeScreenshot: boolean = true) {
     // log step in allure
     allure.addStep(stepMessage);
 
