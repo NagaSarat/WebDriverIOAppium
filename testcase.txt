@@ -1,30 +1,47 @@
 TestCaseTitle: TC-SIGNUP-001 — Verify User Sign Up with Valid Details
-SpecFile: signUpScreen.spec.ts
-PageClass: signUpScreenPage.ts
-LocatorsFile: signUpScreenLocators.json
+SpecFile: signUpTest.spec.ts
+PageClass: signUpPage.ts
+LocatorsFile: signUpLocators.json
 
-Preconditions
-• User is on the Login / Sign up Form screen.  
+# Appium / device capabilities (used for live locator capture)
+captureLocators: true
+appiumUrl: http://127.0.0.1:4723/wd/hub
+platformName: Android
+appium.deviceName: emulator-5554
+appium.platformVersion: 16.0
+appium.automationName: UiAutomator2
+appium.noReset: false
+appium.app: apps/android/Android-NativeDemoApp-0.4.0.apk
+appium.appPackage: com.wdiodemoapp
+appium.appActivity: com.wdiodemoapp.MainActivity
+appium.appWaitActivity: com.wdiodemoapp.*
+appium.autoGrantPermissions: true
+appium.shouldTerminateApp: true
 
+Precondition:
+App Should be opened
+
+Actions
+click(login)
+click(signUp)
+setValue(email, "test@gmail.com")
+setValue(password, "test@123")
+setValue(confirmPassword, "test@123")
+click(signUP)
+isVisible(signedUp)
 Steps
-1. Tap on the **Sign up** tab.  
-2. Verify Email input field is visible.  
-3. Verify Password input field is visible.  
-4. Verify Confirm Password input field is visible.  
-5. Tap inside the Email field and enter a valid new email address.  
-6. Tap inside the Password field and enter a valid password
-7. Tap inside Confirm Password field and enter the same password.  
-8. Verify the **SIGN UP** button becomes enabled after filling all fields.  
-9. Tap the **SIGN UP** button.  
-10. Wait for the loading/spinner to disappear.  
-11. Verify the user is navigated to the Welcome screen
+click on "Login" button
+click on "Sign up" button
+enter email id "test@gmail.com" in "Email" input box
+enter password "test@123" in "Password" input box
+enter password "test@123" in "Confirm password" input box
+click "SIGN UP" button
+validate "Signed Up!" success message
 
 Expected Results
-• Sign up tab is selected and displayed correctly.  
-• Email, Password, and Confirm Password fields are visible and accept input.  
-• Password and Confirm Password fields mask user input.  
-• SIGN UP button remains disabled until all fields contain valid data.  
-• Password and Confirm Password must match — otherwise, an error should display
-• Upon tapping SIGN UP with valid inputs, account creation is initiated.  
-• User successfully reaches the next expected screen after registration.  
-• No error message is displayed for valid sign-up details.  
+Sign up button should be clicked 
+email id "test@gmail.com" should be entered
+password "test@123" should be entered
+password should be confirmed
+SIGN UP button should be clicked
+"Signed Up!" success message should be displayed
