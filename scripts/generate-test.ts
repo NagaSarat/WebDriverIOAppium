@@ -272,7 +272,6 @@ function generateActionsFromSteps(stepsText: string) {
 
 async function callOpenAI(prompt: string) {
   const key = process.env.OPENAI_API_KEY;
-  console.log('OPENAI_API_KEY: '+ key);
   if (!key) throw new Error('Missing OPENAI_API_KEY in env');
 
   const model = process.env.OPENAI_MODEL || 'gpt-4o-mini';
