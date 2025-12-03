@@ -3,6 +3,9 @@ import fs from 'fs';
 import path from 'path';
 import fetch from 'node-fetch';
 import { remote } from 'webdriverio';
+import dotenv from 'dotenv';
+dotenv.config({ override: true });
+console.log("Loaded from .env:", process.env.OPENAI_API_KEY);
 
 type LlmResponse = {
   specPath: string;

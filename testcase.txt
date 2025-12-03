@@ -1,7 +1,7 @@
 TestCaseTitle: TC-SIGNUP-001 — Verify User Sign Up with Valid Details
-SpecFile: signUpTest.spec.ts
-PageClass: signUpPage.ts
-LocatorsFile: signUpLocators.json
+SpecFile: signUp.spec.ts
+PageClass: SignUp.page.ts
+LocatorsFile: signUpPage.json
 
 # Appium / device capabilities (used for live locator capture)
 captureLocators: true

@@ -28,6 +28,7 @@
     "@wdio/types": "^9.0.0",
     "allure-commandline": "^2.34.1",
     "chai": "^6.2.1",
+    "dotenv": "^17.2.3",
     "tree-kill": "^1.2.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
