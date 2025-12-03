@@ -1022,44 +1022,68 @@ async function main() {
     ? parsedActionsFromTestcase.map((a, i) => `${i + 1}. ${a.action}('${a.locatorName}'${a.params.length ? ', ' + a.params.join(', ') : ''})`).join('\n')
     : '(no actions defined)';
 
-  // Auto-generate Actions section from natural language Steps and update testcase.txt if changed
-  try {
-    const generatedActions = generateActionsFromSteps(testSteps);
-    const generatedActionsBlock = generatedActions.length ? ('Actions\n' + generatedActions.join('\n') + '\n') : '';
+// Auto-generate Actions section from natural language Steps and update testcase.txt if changed
+try {
+  const generatedActions = generateActionsFromSteps(testSteps);
+  const generatedActionsBlock = generatedActions.length ? ('Actions\n' + generatedActions.join('\n') + '\n') : '';
 
-    const actionsSectionRegex = /Actions\s*\n([\s\S]*?)(?=Steps|Expected|Preconditions|$)/i;
-    const existingActionsMatch = raw.match(actionsSectionRegex);
-    const existingActionsBody = existingActionsMatch ? existingActionsMatch[1].trim() : null;
+  const actionsSectionRegex = /Actions\s*\n([\s\S]*?)(?=Steps|Expected|Preconditions|$)/i;
+  const existingActionsMatch = raw.match(actionsSectionRegex);
+  const existingActionsBody = existingActionsMatch ? existingActionsMatch[1].trim() : null;
 
-    const normalizedExisting = existingActionsBody ? existingActionsBody.replace(/\r?\n/g, '\n').trim() : '';
-    const normalizedGenerated = generatedActions.join('\n').trim();
+  const normalizedExisting = existingActionsBody ? existingActionsBody.replace(/\r?\n/g, '\n').trim() : '';
+  const normalizedGenerated = generatedActions.join('\n').trim();
 
-    if (normalizedGenerated && normalizedGenerated !== normalizedExisting) {
-      let newRaw: string;
-      if (existingActionsMatch) {
-        newRaw = raw.replace(actionsSectionRegex, 'Actions\n' + generatedActions.join('\n') + '\n');
-      } else {
-        // Insert Actions block before Steps if present, otherwise append after metadata
-        const stepsRegex = /\r?\n?Steps\s*\n/ig;
-        const m = stepsRegex.exec(raw);
-        if (m && m.index !== undefined) {
-          const insertPos = m.index;
-          newRaw = raw.slice(0, insertPos) + '\nActions\n' + generatedActions.join('\n') + '\n\n' + raw.slice(insertPos);
+  if (normalizedGenerated && normalizedGenerated !== normalizedExisting) {
+    console.log('⚠ Auto-generated Actions differ from Actions in testcase.txt.');
+    console.log('--- Generated Actions (preview) ---');
+    console.log(generatedActions.join('\n') || '(none)');
+    console.log('--- End generated preview ---');
+
+    // By default DO NOT modify testcase.txt on disk to avoid surprise edits.
+    // If you *do* want the script to update testcase.txt automatically, add a metadata line to testcase.txt:
+    //   autoupdateactions: true
+    // Accepted values: true | 1 | yes
+    const autoUpdate = (meta['autoupdateactions'] || '').toString().toLowerCase();
+    if (autoUpdate === 'true' || autoUpdate === '1' || autoUpdate === 'yes') {
+      try {
+        let newRaw: string;
+        if (existingActionsMatch) {
+          newRaw = raw.replace(actionsSectionRegex, 'Actions\n' + generatedActions.join('\n') + '\n');
         } else {
-          newRaw = raw + '\n\nActions\n' + generatedActions.join('\n') + '\n';
+          // Insert before Steps if Steps exists, else append
+          const stepsRegex = /\r?\n?Steps\s*\n/ig;
+          const m = stepsRegex.exec(raw);
+          if (m && m.index !== undefined) {
+            const insertPos = m.index;
+            newRaw = raw.slice(0, insertPos) + '\nActions\n' + generatedActions.join('\n') + '\n\n' + raw.slice(insertPos);
+          } else {
+            newRaw = raw + '\n\nActions\n' + generatedActions.join('\n') + '\n';
+          }
         }
-      }
 
-      // Write updated testcase.txt
-      fs.writeFileSync(testcasePath, newRaw, 'utf8');
-      console.log('Updated Actions section in testcase.txt based on Steps.');
-      // refresh raw variable to reflect changes
-      // (so later logic that reads raw will operate on the updated file if needed)
-      // Note: not re-parsing metadata here because metadata didn't change
+        // perform write
+        fs.writeFileSync(testcasePath, newRaw, 'utf8');
+        console.log('Updated Actions section in testcase.txt based on Steps (autoupdateactions=true).');
+        // NOTE: we intentionally do not update the in-memory `raw` variable here
+        // to avoid unexpected side effects later in the function.
+      } catch (writeErr) {
+        console.warn('Failed to write testcase.txt:', (writeErr as any).message || writeErr);
+      }
+    } else {
+      console.log('Did NOT write to testcase.txt (to enable auto-write add "autoupdateactions: true" in testcase.txt metadata).');
     }
-  } catch (e) {
-    console.warn('Could not auto-generate Actions from Steps:', (e as any)?.message || e);
+  } else {
+    // nothing changed or nothing generated
+    if (normalizedGenerated) {
+      console.log('Actions in testcase.txt already match generated Actions.');
+    } else {
+      console.log('No Actions generated from Steps.');
+    }
   }
+} catch (e) {
+  console.warn('Could not auto-generate Actions from Steps:', (e as any)?.message || e);
+}
 
   // === Inspect Utilities/CommonActions.page.ts for available methods ===
   const commonActionsPath = path.join(repoRoot, 'Utilities', 'CommonActions.page.ts');

@@ -21,14 +21,6 @@ appium.shouldTerminateApp: true
 Precondition:
 App Should be opened
 
-Actions
-click(login)
-click(signUp)
-setValue(email, "test@gmail.com")
-setValue(password, "test@123")
-setValue(confirmPassword, "test@123")
-click(signUP)
-isVisible(signedUp)
 Steps
 click on "Login" button
 click on "Sign up" button
