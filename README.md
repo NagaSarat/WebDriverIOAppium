@@ -128,15 +128,7 @@ This framework supports automated file generation using LLMs.
 
 ### 1️⃣ Set your OpenAI API key
 
-**Windows:**
-```bash
-setx OPENAI_API_KEY "your-api-key-here"
-```
-
-**macOS / Linux:**
-```bash
-export OPENAI_API_KEY="your-api-key-here"
-```
+- In .env file add OPENAI_API_KEY=<your-api-key>
 
 ### 2️⃣ Update `testcase.txt`
 Provide:
