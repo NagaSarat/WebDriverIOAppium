@@ -128,7 +128,7 @@ This framework supports automated file generation using LLMs.
 
 ### 1️⃣ Set your OpenAI API key
 
-- In .env file add OPENAI_API_KEY=<your-api-key>
+- Creat .env file in project root folder and add OPENAI_API_KEY=<your-api-key> in it
 
 ### 2️⃣ Update `testcase.txt`
 Provide:
