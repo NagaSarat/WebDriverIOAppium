@@ -345,21 +345,29 @@ function ensureAndroidDeviceIsRunning() {
   }
 }
 
-function ensureAppiumServerRunning() {
-  return fetch("http://localhost:4723/wd/hub/status")
-    .then(r => r.json())
-    .catch(() => {
-      throw new Error("❌ Appium server is not running on 4723. Start Appium to fetch and add the locators automatically in json file.");
-    });
-}
+async function ensureAppiumServerRunning() {
+  try {
+    const res = await fetch("http://localhost:4723/wd/hub/status");
+    const json = await res.json();
 
+    if (!json || !json.value) {
+      throw new Error("Invalid Appium response");
+    }
+
+    console.log("✔ Appium Server Running");
+  } catch (err) {
+    console.error("❌ Appium server is NOT running on port 4723.");
+    console.error("   Please start Appium before running this script to generate locators and add it to locators json file automatically.\n");
+    process.exit(1); // 🔥 FORCE-STOP SCRIPT
+  }
+}
 
 /** Capture locators from a live device via Appium + WebdriverIO
  * meta must include: appiumUrl, platformName (Android|iOS), and capability keys as needed
  */
 async function captureLocatorsFromDevice(meta: Record<string,string>, repoRoot: string, targetBasename: string, testcaseContent: string) {
-  ensureAppiumServerRunning();
-  ensureAndroidDeviceIsRunning();
+  await ensureAppiumServerRunning();
+  await ensureAndroidDeviceIsRunning();
   const appiumUrl = meta['appiumurl'] || meta['appium url'] || process.env.APPIUM_URL || 'http://localhost:4723/wd/hub';
   const platformName = (meta['platformname'] || meta['platform'] || process.env.PLATFORM_NAME || '').toLowerCase();
   if (!platformName) throw new Error('captureLocators requested but platformName not provided in testcase metadata (platformName)');
