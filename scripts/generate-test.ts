@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import fetch from 'node-fetch';
 import { remote } from 'webdriverio';
+import { execSync } from 'child_process';
 import dotenv from 'dotenv';
 dotenv.config({ override: true });
 console.log("Loaded from .env:", process.env.OPENAI_API_KEY);
@@ -319,10 +320,46 @@ async function callOpenAI(prompt: string) {
   }
 }
 
+function ensureAndroidDeviceIsRunning() {
+  try {
+    const output = execSync("adb devices", { encoding: "utf8" });
+    const lines = output.split("\n").map(l => l.trim()).filter(Boolean);
+
+    // Filter device lines excluding header
+    const deviceLines = lines.filter(l => !l.startsWith("List of devices attached"));
+
+    // Match real devices/emulators that show as "device"
+    const onlineDevices = deviceLines.filter(l => l.endsWith("device"));
+
+    if (onlineDevices.length === 0) {
+      console.error("❌ No Android device/emulator detected.");
+      console.error("   Start an emulator from Android Studio or connect a real device to fetch the locators automatically.\n");
+      process.exit(1);  // 🔥 STOP SCRIPT IMMEDIATELY
+    }
+
+    console.log("✔ Android device detected:", onlineDevices.join(", "));
+  } catch (err) {
+    console.error("\n❌ ADB execution failed — ensure ANDROID_HOME/platform-tools is installed & adb is in PATH.");
+    console.error(String(err));
+    process.exit(1);   // 🔥 STOP SCRIPT IMMEDIATELY
+  }
+}
+
+function ensureAppiumServerRunning() {
+  return fetch("http://localhost:4723/wd/hub/status")
+    .then(r => r.json())
+    .catch(() => {
+      throw new Error("❌ Appium server is not running on 4723. Start Appium to fetch and add the locators automatically in json file.");
+    });
+}
+
+
 /** Capture locators from a live device via Appium + WebdriverIO
  * meta must include: appiumUrl, platformName (Android|iOS), and capability keys as needed
  */
 async function captureLocatorsFromDevice(meta: Record<string,string>, repoRoot: string, targetBasename: string, testcaseContent: string) {
+  ensureAppiumServerRunning();
+  ensureAndroidDeviceIsRunning();
   const appiumUrl = meta['appiumurl'] || meta['appium url'] || process.env.APPIUM_URL || 'http://localhost:4723/wd/hub';
   const platformName = (meta['platformname'] || meta['platform'] || process.env.PLATFORM_NAME || '').toLowerCase();
   if (!platformName) throw new Error('captureLocators requested but platformName not provided in testcase metadata (platformName)');
