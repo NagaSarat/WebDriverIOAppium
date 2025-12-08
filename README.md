@@ -19,13 +19,14 @@ Before setting up this framework, ensure the following tools are installed:
 - [Node.js (Latest LTS)](https://nodejs.org/)
 - Android SDK (required for Android automation)
 - Xcode (required for iOS automation — macOS only)
-- Appium and required drivers
-- Java 8+ installed and configured
+- Appium and UIAutomator2 and XCUITest drivers
+- Java
 
 ✅ Ensure the following environment variables are configured:
 
 - `JAVA_HOME`
 - `ANDROID_HOME`
+- `ANDROID_SDK_ROOT`
 - `PATH` includes platform-tools, emulator & tools
 
 ---
