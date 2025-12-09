@@ -83,7 +83,7 @@ appium-doctor --ios       # For iOS (macOS only)
 ```
 
 ---
-### 5️⃣ For iOS sample app
+### ■ For iOS sample app
 
 Clone the official Appium iOS TestApp repository
 ```bash
@@ -101,7 +101,7 @@ xcodebuild -scheme TestApp -sdk iphonesimulator -configuration Debug -derivedDat
 ```
 Your .app will be created here: ios-test-app/build/Build/Products/Debug-iphonesimulator/TestApp.app (paste TestApp.app in apps/ios folder in framework, now the app will be installed automatically)
 ---
-### For using appium inspector in Mac for iOS app locators
+### ■ For using appium inspector in Mac for iOS app locators
 
 launch inspector in url: https://inspector.appiumpro.com/
 
