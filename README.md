@@ -83,7 +83,7 @@ appium-doctor --ios       # For iOS (macOS only)
 ```
 
 ---
-### 5: Install app on ios simulator
+### 5️⃣ Install app on ios simulator
 
 switch on simulator
 ```bash
@@ -108,7 +108,7 @@ mkdir -p build
 ```bash
 xcodebuild -scheme TestApp -sdk iphonesimulator -configuration Debug -derivedDataPath build
 ```
-Your .app will be created here: ios-test-app/build/Build/Products/Debug-iphonesimulator/TestApp.app
+Your .app will be created here: ios-test-app/build/Build/Products/Debug-iphonesimulator/TestApp.app (Use this in your WebdriverIO capabilities like "appium:app": "/path/to/TestApp.app")
 
 Now the installation is done.
 ---
