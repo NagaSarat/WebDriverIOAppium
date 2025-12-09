@@ -1,22 +1,22 @@
 {
   "usernameInput": {
     "android": "//android.widget.EditText[@content-desc='input-email']",
-    "ios": "//XCUIElementTypeTextField[@name='inputEmail']"
+    "ios": "//XCUIElementTypeTextField[@name='IntegerA']"
   },
 
   "passwordInput": {
     "android": "//android.widget.EditText[@content-desc='input-password']",
-    "ios": "//XCUIElementTypeSecureTextField[@name='inputPassword']"
+    "ios": "//XCUIElementTypeTextField[@name='IntegerB']"
   },
 
   "loginModule": {
     "android": "//android.widget.TextView[@text='Login']",
-    "ios": "//XCUIElementTypeStaticText[contains(@name,'Login')]"
+    "ios": "//XCUIElementTypeStaticText[@name='Compute Sum']"
   },
 
   "loginButton": {
     "android": "//android.view.ViewGroup[@content-desc='button-LOGIN']/android.view.ViewGroup",
-    "ios": "//XCUIElementTypeButton[@name='LOGIN']"
+    "ios": "//XCUIElementTypeStaticText[@name='Compute Sum']"
   },
 
   "EmailError": {

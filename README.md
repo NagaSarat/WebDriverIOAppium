@@ -105,6 +105,10 @@ If no platform is provided, **Android** is used by default.
 ```bash
 npx wdio run ./wdio.conf.ts --spec ./test/specs/login.spec.ts
 ```
+for ios run below command
+```bash
+PLATFORM=ios npx wdio run ./wdio.conf.ts --spec ./test/specs/login.spec.ts
+```
 
 ### ▶️ Run full test suite
 ```bash
