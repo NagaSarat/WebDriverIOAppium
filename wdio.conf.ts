@@ -57,13 +57,15 @@ const androidCaps = {
   'appium:shouldTerminateApp': true
 };
 
+const iosAppPath = path.join(process.cwd(), 'apps', 'ios', 'TestApp.app');
 const iosCaps = {
   platformName: 'iOS',
   'appium:platformVersion': '26.1',
   'appium:deviceName': 'iPhone 17 Pro',
   'appium:automationName': 'XCUITest',
-  'appium:app': '/Users/haribabumaila/ios-test-app/build/Build/Products/Debug-iphonesimulator/TestApp.app',
-  'appium:noReset': false
+  'appium:app': iosAppPath,
+  'appium:noReset': false,
+  'appium:fullReset': false
 };
 
 // ─────────────────────────────

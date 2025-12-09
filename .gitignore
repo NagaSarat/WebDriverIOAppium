@@ -97,6 +97,7 @@ local.properties
 
 # iOS / Xcode
 *.ipa
+*.app
 *.xcarchive
 DerivedData/
 build/
