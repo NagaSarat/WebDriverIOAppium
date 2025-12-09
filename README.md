@@ -109,9 +109,9 @@ This TestApp.app is the simulator version, meaning it runs ONLY on iOS Simulator
 ---
 ### ■ For using appium inspector in Mac for iOS app locators
 
-launch inspector in url: https://inspector.appiumpro.com/
+Launch inspector in url: https://inspector.appiumpro.com/
 
-run below command in terminal
+Run below command in terminal
 ```bash
 npx appium --address 127.0.0.1 --port 4723 --base-path /wd/hub --allow-cors
 ```
@@ -135,11 +135,11 @@ If no platform is provided, **Android** is used by default.
 ## 🧪 Running Test Cases
 
 ### ▶️ Run a specific test file
-for android run below command
+For android run below command
 ```bash
 PLATFORM=android npx wdio run ./wdio.conf.ts --spec ./test/specs/login.spec.ts
 ```
-for ios run below command
+For ios run below command
 ```bash
 PLATFORM=ios npx wdio run ./wdio.conf.ts --spec ./test/specs/login.spec.ts
 ```
