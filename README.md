@@ -90,17 +90,21 @@ Clone the official Appium iOS TestApp repository
 git clone https://github.com/appium/ios-test-app.git
 ```
 Build the .app for the Simulator, run below three commands
+Go into the project folder
 ```bash
 cd ios-test-app
 ```
+Create a custom build directory
 ```bash
 mkdir -p build   
 ```
+Build the TestApp using Xcode command-line tools
 ```bash
 xcodebuild -scheme TestApp -sdk iphonesimulator -configuration Debug -derivedDataPath build
 ```
-Your .app will be created here: `ios-test-app/build/Build/Products/Debug-iphonesimulator/TestApp.app` (paste `TestApp.app` in `apps/ios` folder in framework, now the app will be installed automatically)
+After the build, Xcode generates the compiled simulator app here: `ios-test-app/build/Build/Products/Debug-iphonesimulator/TestApp.app` (paste `TestApp.app` in `apps/ios` folder in framework, now the app will be installed automatically)
 
+This TestApp.app is the simulator version, meaning it runs ONLY on iOS Simulator, it cannot run on a real device. Appium requires a simulator build of an iOS app to automate it. You cannot automate .ipa for simulators.
 ---
 ### ■ For using appium inspector in Mac for iOS app locators
 
