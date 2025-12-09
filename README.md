@@ -82,6 +82,14 @@ appium-doctor --android   # For Android
 appium-doctor --ios       # For iOS (macOS only)
 ```
 
+### For using appium inspector in Mac for iOS app locators
+
+launch inspector in url: https://inspector.appiumpro.com/
+
+run below command in terminal
+```bash
+npx appium --address 127.0.0.1 --port 4723 --base-path /wd/hub --allow-cors
+```
 ---
 
 ## 📱 Selecting Platform (Android / iOS)
