@@ -82,6 +82,14 @@ appium-doctor --android   # For Android
 appium-doctor --ios       # For iOS (macOS only)
 ```
 
+### For using appium inspector in Mac for iOS app locators
+
+launch inspector in url: https://inspector.appiumpro.com/
+
+run below command in terminal
+```bash
+npx appium --address 127.0.0.1 --port 4723 --base-path /wd/hub --allow-cors
+```
 ---
 
 ## 📱 Selecting Platform (Android / iOS)
@@ -104,6 +112,10 @@ If no platform is provided, **Android** is used by default.
 ### ▶️ Run a specific test file
 ```bash
 npx wdio run ./wdio.conf.ts --spec ./test/specs/login.spec.ts
+```
+for ios run below command
+```bash
+PLATFORM=ios npx wdio run ./wdio.conf.ts --spec ./test/specs/login.spec.ts
 ```
 
 ### ▶️ Run full test suite

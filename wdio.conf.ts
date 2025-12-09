@@ -59,11 +59,11 @@ const androidCaps = {
 
 const iosCaps = {
   platformName: 'iOS',
+  'appium:platformVersion': '26.1',
+  'appium:deviceName': 'iPhone 17 Pro',
   'appium:automationName': 'XCUITest',
-  'appium:deviceName': 'iPhone 14',
-  'appium:platformVersion': '16.0',
-  'appium:app': path.join(process.cwd(), 'apps/Cogmento.ipa'),
-  'appium:noReset': true
+  'appium:app': '/Users/haribabumaila/ios-test-app/build/Build/Products/Debug-iphonesimulator/TestApp.app',
+  'appium:noReset': false
 };
 
 // ─────────────────────────────
