@@ -83,25 +83,31 @@ appium-doctor --ios       # For iOS (macOS only)
 ```
 
 ---
-### 5️⃣ For iOS sample app
+### ■ For iOS sample app
 
 Clone the official Appium iOS TestApp repository
 ```bash
 git clone https://github.com/appium/ios-test-app.git
 ```
 Build the .app for the Simulator, run below three commands
+Go into the project folder
 ```bash
 cd ios-test-app
 ```
+Create a custom build directory
 ```bash
 mkdir -p build   
 ```
+Build the TestApp using Xcode command-line tools
 ```bash
 xcodebuild -scheme TestApp -sdk iphonesimulator -configuration Debug -derivedDataPath build
 ```
-Your .app will be created here: ios-test-app/build/Build/Products/Debug-iphonesimulator/TestApp.app (paste TestApp.app in apps/ios folder in framework)
+After the build, Xcode generates the compiled simulator app here: `ios-test-app/build/Build/Products/Debug-iphonesimulator/TestApp.app` (paste `TestApp.app` in `apps/ios` folder in framework, now the app will be installed automatically)
+
+This TestApp.app is the simulator version, meaning it runs ONLY on iOS Simulator, it cannot run on a real device. Appium requires a simulator build of an iOS app to automate it. You cannot automate .ipa for simulators.
+
 ---
-### For using appium inspector in Mac for iOS app locators
+### ■ For using appium inspector in Mac for iOS app locators
 
 launch inspector in url: https://inspector.appiumpro.com/
 
@@ -199,29 +205,6 @@ allure open
 
 ---
 
-## 🖼️ Step-Level Screenshot Control
-
-This framework allows configurable screenshot behavior:
-
-### Enable screenshots globally
-```bash
-SCREENSHOT_STEPS=true npx wdio run ./wdio.conf.ts
-```
-
-### Disable screenshots
-```bash
-SCREENSHOT_STEPS=false npx wdio run ./wdio.conf.ts
-```
-
-### Override in test code
-```ts
-await base.addStep('Login successful', true);
-```
-
-Screenshots attach to the same Allure step.
-
----
-
 ## ⏱️ Timeout Configuration
 
 Modify global element wait timeout in `wdio.conf.ts`:
@@ -248,9 +231,7 @@ waitforTimeout: 60000, // 60 seconds
 ## 💡 Recommendations
 
 - Always run `appium-doctor` after SDK upgrades
-- Delete old allure-results before new runs for cleaner reporting
 - Maintain separate configs for CI, staging & prod
-- Use cloud device providers (BrowserStack, pCloudy, SauceLabs) for scaling
 
 ---
 
@@ -435,6 +416,3 @@ This framework enables fast, maintainable, scalable, and AI-assisted mobile test
 Feel free to fork, enhance, and contribute! 💙
 
 ---
-
-📩 For questions, enhancements, or feature requests — open an issue!
-
