@@ -82,19 +82,18 @@ appium-doctor --android   # For Android
 appium-doctor --ios       # For iOS (macOS only)
 ```
 
-### install app on ios simulator
+---
+### 5: Install app on ios simulator
 
-- switch on simulator
+switch on simulator
 ```bash
 xcrun simctl boot "iPhone 17 Pro"
 ```
-- Open Simulator 
+Open Simulator 
 ```bash
 open -a Simulator
 ```
-- Remove macOS quarantine flag (When a zipped app is downloaded, macOS marks it with quarantine — remove that recursively)
-
-- for ios sample app 
+For ios sample app 
 Clone the official Appium iOS TestApp repository
 ```bash
 git clone https://github.com/appium/ios-test-app.git
@@ -109,21 +108,18 @@ mkdir -p build
 ```bash
 xcodebuild -scheme TestApp -sdk iphonesimulator -configuration Debug -derivedDataPath build
 ```
-now Your .app will be created here: ios-test-app/build/Build/Products/Debug-iphonesimulator/TestApp.app
+Your .app will be created here: ios-test-app/build/Build/Products/Debug-iphonesimulator/TestApp.app
 
-- Check if the app built correctly, run below command
+Now the installation is done.
+---
+Check if the app built correctly, run below command
 ```bash
 file build/Build/Products/Debug-iphonesimulator/TestApp.app/TestApp
 ```
 Expected output : Mach-O 64-bit executable x86_64 or arm64-simulator
-
-
-- Verify simulator is on
-```bash
-xcrun simctl list devices | grep "iPhone 17 Pro" -A1
-```
-
-Remove macOS quarantine flag (fixes the prohibited icon):
+---
+Remove macOS quarantine flag (fixes the prohibited icon issue):
+Remove macOS quarantine flag (When a zipped app is downloaded, macOS marks it with quarantine — remove that recursively)
 replace path below with your app path
 ```bash
 APP_PATH="build/Build/Products/Debug-iphonesimulator/TestApp.app"
@@ -164,7 +160,7 @@ BUNDLE_ID="com.example.apple-samplecode.TestApp"
 ```bash
 xcrun simctl launch booted "$BUNDLE_ID"
 ```
-
+---
 ### For using appium inspector in Mac for iOS app locators
 
 launch inspector in url: https://inspector.appiumpro.com/
