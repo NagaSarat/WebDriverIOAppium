@@ -102,16 +102,16 @@ Build the TestApp using Xcode command-line tools
 ```bash
 xcodebuild -scheme TestApp -sdk iphonesimulator -configuration Debug -derivedDataPath build
 ```
-After the build, Xcode generates the compiled simulator app here: `ios-test-app/build/Build/Products/Debug-iphonesimulator/TestApp.app` (paste `TestApp.app` in `apps/ios` folder in framework, now the app will be installed automatically)
+After the build, Xcode generates the compiled simulator app here: `ios-test-app/build/Build/Products/Debug-iphonesimulator/TestApp.app` (paste `TestApp.app` in `apps/ios` folder in framework, now the app will be installed automatically when you run the test)
 
 This TestApp.app is the simulator version, meaning it runs ONLY on iOS Simulator, it cannot run on a real device. Appium requires a simulator build of an iOS app to automate it. You cannot automate .ipa for simulators.
 
 ---
 ### ■ For using appium inspector in Mac for iOS app locators
 
-launch inspector in url: https://inspector.appiumpro.com/
+Launch inspector in url: https://inspector.appiumpro.com/
 
-run below command in terminal
+Run below command in terminal
 ```bash
 npx appium --address 127.0.0.1 --port 4723 --base-path /wd/hub --allow-cors
 ```
@@ -135,11 +135,11 @@ If no platform is provided, **Android** is used by default.
 ## 🧪 Running Test Cases
 
 ### ▶️ Run a specific test file
-for android run below command
+For android run below command
 ```bash
 PLATFORM=android npx wdio run ./wdio.conf.ts --spec ./test/specs/login.spec.ts
 ```
-for ios run below command
+For ios run below command
 ```bash
 PLATFORM=ios npx wdio run ./wdio.conf.ts --spec ./test/specs/login.spec.ts
 ```
