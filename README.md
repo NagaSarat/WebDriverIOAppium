@@ -205,29 +205,6 @@ allure open
 
 ---
 
-## 🖼️ Step-Level Screenshot Control
-
-This framework allows configurable screenshot behavior:
-
-### Enable screenshots globally
-```bash
-SCREENSHOT_STEPS=true npx wdio run ./wdio.conf.ts
-```
-
-### Disable screenshots
-```bash
-SCREENSHOT_STEPS=false npx wdio run ./wdio.conf.ts
-```
-
-### Override in test code
-```ts
-await base.addStep('Login successful', true);
-```
-
-Screenshots attach to the same Allure step.
-
----
-
 ## ⏱️ Timeout Configuration
 
 Modify global element wait timeout in `wdio.conf.ts`:
@@ -254,9 +231,7 @@ waitforTimeout: 60000, // 60 seconds
 ## 💡 Recommendations
 
 - Always run `appium-doctor` after SDK upgrades
-- Delete old allure-results before new runs for cleaner reporting
 - Maintain separate configs for CI, staging & prod
-- Use cloud device providers (BrowserStack, pCloudy, SauceLabs) for scaling
 
 ---
 
@@ -441,6 +416,3 @@ This framework enables fast, maintainable, scalable, and AI-assisted mobile test
 Feel free to fork, enhance, and contribute! 💙
 
 ---
-
-📩 For questions, enhancements, or feature requests — open an issue!
-
