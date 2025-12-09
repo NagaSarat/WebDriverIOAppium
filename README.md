@@ -99,7 +99,7 @@ mkdir -p build
 ```bash
 xcodebuild -scheme TestApp -sdk iphonesimulator -configuration Debug -derivedDataPath build
 ```
-Your .app will be created here: ios-test-app/build/Build/Products/Debug-iphonesimulator/TestApp.app (paste TestApp.app in apps/ios folder in framework)
+Your .app will be created here: ios-test-app/build/Build/Products/Debug-iphonesimulator/TestApp.app (paste TestApp.app in apps/ios folder in framework, now the app will be installed automatically)
 ---
 ### For using appium inspector in Mac for iOS app locators
 
