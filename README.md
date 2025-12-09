@@ -104,7 +104,7 @@ xcodebuild -scheme TestApp -sdk iphonesimulator -configuration Debug -derivedDat
 ```
 After the build, Xcode generates the compiled simulator app here: `ios-test-app/build/Build/Products/Debug-iphonesimulator/TestApp.app` (paste `TestApp.app` in `apps/ios` folder in framework, now the app will be installed automatically)
 
-This `TestApp.app` is the simulator version, meaning it runs ONLY on iOS Simulator, it cannot run on a real device. Appium requires a simulator build of an iOS app to automate it. You cannot automate .ipa for simulators.
+This `TestApp.app` is the simulator version, meaning it runs ONLY on iOS Simulator, it cannot run on a real device. Appium requires a simulator build of an iOS app to automate it. You cannot automate `.ipa` for simulators.
 ---
 ### ■ For using appium inspector in Mac for iOS app locators
 
