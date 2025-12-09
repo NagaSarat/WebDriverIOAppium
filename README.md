@@ -83,17 +83,8 @@ appium-doctor --ios       # For iOS (macOS only)
 ```
 
 ---
-### 5️⃣ Install app on ios simulator
+### 5️⃣ For iOS sample app
 
-switch on simulator
-```bash
-xcrun simctl boot "iPhone 17 Pro"
-```
-Open Simulator 
-```bash
-open -a Simulator
-```
-For ios sample app 
 Clone the official Appium iOS TestApp repository
 ```bash
 git clone https://github.com/appium/ios-test-app.git
@@ -108,58 +99,7 @@ mkdir -p build
 ```bash
 xcodebuild -scheme TestApp -sdk iphonesimulator -configuration Debug -derivedDataPath build
 ```
-Your .app will be created here: ios-test-app/build/Build/Products/Debug-iphonesimulator/TestApp.app (Use this in your WebdriverIO capabilities like "appium:app": "/path/to/TestApp.app")
-
-Now the installation is done.
----
-Check if the app built correctly, run below command
-```bash
-file build/Build/Products/Debug-iphonesimulator/TestApp.app/TestApp
-```
-Expected output : Mach-O 64-bit executable x86_64 or arm64-simulator
----
-Remove macOS quarantine flag (fixes the prohibited icon issue):
-Remove macOS quarantine flag (When a zipped app is downloaded, macOS marks it with quarantine — remove that recursively)
-replace path below with your app path
-```bash
-APP_PATH="build/Build/Products/Debug-iphonesimulator/TestApp.app"
-```
-run below two commands
-```bash
-xattr -lr "$APP_PATH"  
-```
-```bash
-sudo xattr -r -d com.apple.quarantine "$APP_PATH" || true
-```
-
-Ensure the executable permissions are OK run below three commands
-```bash
-BINARY="$APP_PATH/TestApp"  
-```
-```bash
-chmod +x "$BINARY" 
-```
-```bash
-chmod -R u+rwX "$APP_PATH"
-```
-
-Verify Info.plist and bundle id (we need bundle id to launch)
-```bash
-/usr/libexec/PlistBuddy -c 'Print :CFBundleIdentifier' "$APP_PATH/Info.plist"
-```
-
-Install the .app onto the booted simulator
-```bash
-xcrun simctl install booted "$APP_PATH"
-```
-
-Launch the app on the simulator, run below two commands
-```bash
-BUNDLE_ID="com.example.apple-samplecode.TestApp"
-```
-```bash
-xcrun simctl launch booted "$BUNDLE_ID"
-```
+Your .app will be created here: ios-test-app/build/Build/Products/Debug-iphonesimulator/TestApp.app (paste TestApp.app in apps/ios folder in framework)
 ---
 ### For using appium inspector in Mac for iOS app locators
 
